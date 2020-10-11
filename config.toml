@@ -1,7 +1,7 @@
 baseURL = "http://nyaannyaan.github.io/blog"
 languageCode = "ja"
 title = "test title"
-contentDir = "docs"
+contentDir = "posts"
 theme = "ananke"
 [taxonomies]
 tag = "tags"
