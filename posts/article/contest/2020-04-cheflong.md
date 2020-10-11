@@ -78,11 +78,11 @@ tag: "contest"
 
     - [maspyさんの記事](https://maspypy.com/atcoder-g-%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0%E3%81%AE%E7%B7%8F%E5%92%8C%EF%BC%88square869120contest%EF%BC%89)
 
-    - 追記：分割統治をすると$O(N \log ^ 2 N)$になる
-
 - 最初は変数変換の部分をFFTで実装したが、$\mathrm{O}( N ^ 2 \log N)$でTLE…(Arbitrary Mod FFTは定数倍が重い…)
 
     - よくよく考えると変数変換はFFTせずとも部分分数分解に必要な次数だけ計算すればよく、そうするとlogが落ちて$\mathrm{O} (N ^ 2)$になる
+
+    - 追記：分割統治をすると$O(N \log ^ 2 N)$になる
 
 - 部分分数分解が出来れば、あとは各クエリに対して$\mathrm{O} (N \log ( \min(D , \mathrm{mod}) ) )$で答えを求めればよい
 

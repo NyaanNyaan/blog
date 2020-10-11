@@ -1,0 +1,16 @@
+{{ $script := .Site.Data.webpack_assets.app }}
+{{ with $script.js }}
+<script src="{{ relURL (printf "%s%s" "dist/" .) }}"></script>
+<script>
+  MathJax = {
+    chtml: {
+      matchFontHeight: false
+    },
+    tex: {
+      inlineMath: [['$', '$']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+{{ end }}
