@@ -1,7 +1,7 @@
 ---
 title: "CodeChef April Challenge 2020 Div.1"
 date: 2020-04-14T20:26:31+09:00
-tag: "contest"
+tag: ["contest","codechef"]
 ---
 
 (過去記事の移植です。)
