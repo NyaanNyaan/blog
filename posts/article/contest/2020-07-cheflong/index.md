@@ -1,7 +1,7 @@
 ---
 title: "CodeChef July Challenge 2020 Div.1"
 date: 2020-10-11T21:58:39+09:00
-tag: ["contest", "codechef"]
+tags: ["contest", "codechef"]
 ---
 
 (blogへの記事アップロードへの練習用。乱文なのでそのうち消すかも)
@@ -91,7 +91,11 @@ $$S_a(T) = \frac{1}{2^{N-1}}(T^2+1)^a (T^2-1)^b T^\frac{(N-1)(N-4)}{2}$$
 
 となり、変形して
 
-$$S_a(T)=\sum_i s_{ai} T^i$としたとき答えは$\frac{N(N-1)}{2}^{-t} \sum_i s_{ai} i^t$$
+$$S_a(T)=\sum_i s_{ai} T^i$$
+
+としたとき答えは
+
+$$\frac{N(N-1)}{2}^{-t} \sum_i s_{ai} i^t$$
 
 になる。(EGFなので$t!$がうまくキャンセルされる)$S_a(T)$は項数が$N$項で抑えられるので、対応する全域木の場合の数を$c_a$と置いたとき、$\sum_a S_a(T)c_a$を前もって計算しておけばクエリ$\rm O(N \log t)$で計算できる。
 
@@ -164,7 +168,7 @@ $$G(i) = \sum_{j|j>i}\mathrm{lcp}(i,j)$$
 
 そうして得られた木に対してHL分解+LazySegをすると解ける。($\mathrm{O}(N \log^2N)$でギリギリなので定数倍高速化が必要)
 
-![Cartesian Tree]("https://i.imgur.com/OXKGUD5.png")
+![Cartesian Tree](tree.png)
 
 #### 感想
 
