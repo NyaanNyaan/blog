@@ -3,10 +3,8 @@ title: "Test"
 date: 2020-10-13T18:46:29+09:00
 draft: false
 ---
-あああ
-{{< script >}}
-<script type="shogizumen" charset="utf-8" src="/js/shogizumen.js"></script>
-{{< /script >}}
+{{<zumen>}}
+
 <figure class="zumen">
 <figcaption>【第0図】1手目</figcaption>
 <pre class="shogizumen">
