@@ -28,8 +28,7 @@ draft: false
 ７六歩(77)　３四歩(33)　２六歩(27)　４四歩(43)<br>
 ４八銀(39)　４二飛(82)<br>
 <figure class="zumen">
-<figcaption> 
-</figcaption>
+<figcaption>【第2図】6手目４二飛(82)まで</figcaption>
 <pre class="shogizumen">
 後手の持駒：
   ９ ８ ７ ６ ５ ４ ３ ２ １
@@ -54,8 +53,7 @@ draft: false
 ５六歩(57)　３二銀(31)　７八玉(68)　５二金(41)<br>
 ５八金(49)　９四歩(93)　５七銀(48)　４三銀(32)<br>
 <figure class="zumen">
-<figcaption> 
-</figcaption>
+<figcaption>【第3図】18手目４三銀(32)まで</figcaption>
 <pre class="shogizumen">
 後手の持駒：
   ９ ８ ７ ６ ５ ４ ３ ２ １
