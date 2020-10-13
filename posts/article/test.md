@@ -1,11 +1,12 @@
 ---
 title: "Test"
 date: 2020-10-13T18:46:29+09:00
-draft: true
+draft: false
 ---
 あああ
 {{< script >}}
-<div>
+<script type="shogizumen" charset="utf-8" src="/js/shogizumen.js"></script>
+{{< /script >}}
 <figure class="zumen">
 <figcaption>【第0図】1手目</figcaption>
 <pre class="shogizumen">
@@ -25,5 +26,3 @@ draft: true
 先手の持駒：
 </pre>
 </figure>
-</div>
-  {{< /script >}}
