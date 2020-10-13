@@ -24,9 +24,14 @@ draft: false
 先手の持駒：
 </pre>
 </figure>
-<br><br>【第1図からの指し手】<br>
-７六歩(77)　３四歩(33)　２六歩(27)　４四歩(43)<br>
-４八銀(39)　４二飛(82)<br>
+
+<br><br>
+ **【第1図からの指し手】**
+
+<span style ="color: red">**７六歩(77)　３四歩(33)　２六歩(27)　４四歩(43)**</span>
+
+<span style ="color: red">**４八銀(39)　４二飛(82)**</span>
+
 <figure class="zumen">
 <figcaption>【第2図】6手目４二飛(82)まで</figcaption>
 <pre class="shogizumen">
@@ -47,11 +52,16 @@ draft: false
 </pre>
 </figure>
 四間飛車
-<br>
-<br><br>【第2図からの指し手】<br>
-２五歩(26)　３三角(22)　６八玉(59)　７二銀(71)<br>
-５六歩(57)　３二銀(31)　７八玉(68)　５二金(41)<br>
-５八金(49)　９四歩(93)　５七銀(48)　４三銀(32)<br>
+
+<br><br>
+**【第2図からの指し手】**
+
+<span style ="color: red">**２五歩(26)　３三角(22)　６八玉(59)　７二銀(71)**</span>
+
+<span style ="color: red">**５六歩(57)　３二銀(31)　７八玉(68)　５二金(41)**</span>
+
+<span style ="color: red">**５八金(49)　９四歩(93)　５七銀(48)　４三銀(32)**</span>
+
 <figure class="zumen">
 <figcaption>【第3図】18手目４三銀(32)まで</figcaption>
 <pre class="shogizumen">
@@ -72,4 +82,3 @@ draft: false
 </pre>
 </figure>
 ユキ式
-<br>
