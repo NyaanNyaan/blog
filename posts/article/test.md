@@ -3,8 +3,6 @@ title: "Test"
 date: 2020-10-13T18:46:29+09:00
 draft: false
 ---
-{{<zumen>}}
-
 <figure class="zumen">
 <figcaption>【第1図】初期局面</figcaption>
 <pre class="shogizumen">

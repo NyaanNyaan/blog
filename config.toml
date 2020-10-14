@@ -7,7 +7,6 @@ theme = "ananke"
 [params]
   body_classes = "avenir bg-near-white"
   post_content_classes = "code"
-  commentoEnable = true
   custom_css = ["css/zumen.css"]
 
 [taxonomies]
