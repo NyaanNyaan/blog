@@ -1,19 +1,19 @@
 pre {
   font-family: Osaka-mono, "MS Gothic", monospace;
-  font-size: 20px;
+  font-size: 13px;
 }
 code { 
   font-family: Osaka-mono, "MS Gothic", monospace;
 }
 .zumen {
-  width: 360px;
+  width: 320px;
   display: inline-block;
   color: black;
   background-color: white;
   font-family : '游明朝','YuMincho','ヒラギノ明朝 ProN W3','Hiragino Mincho ProN','ＭＳ Ｐ明朝','MS Mincho',serif;
 }
 pre.shogizumen {
-  width: 336px; /* +24px */
+  width: 296px; /* +24px */
   margin:0;
   padding:0;
   padding-left: 24px;

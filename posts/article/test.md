@@ -28,9 +28,9 @@ draft: false
 <br><br>
  <b>【第1図からの指し手】</b>
 
-<span style ="color: red"><b>☗７六歩　☖３四歩　☗２六歩　☖４四歩</b></span>
+<span style ="color: red"><b>☗７六歩☖３四歩☗２六歩☖４四歩</b></span>
 
-<span style ="color: red"><b>☗４八銀　☖４二飛</b></span>
+<span style ="color: red"><b>☗４八銀☖４二飛</b></span>
 
 <b>（第2図）</b>
 <figure class="zumen">
@@ -58,11 +58,11 @@ draft: false
 <br><br>
  <b>【第2図からの指し手】</b>
 
-<span style ="color: red"><b>☗２五歩　☖３三角　☗６八玉　☖７二銀</b></span>
+<span style ="color: red"><b>☗２五歩☖３三角☗６八玉☖７二銀</b></span>
 
-<span style ="color: red"><b>☗５六歩　☖３二銀　☗７八玉　☖５二金</b></span>
+<span style ="color: red"><b>☗５六歩☖３二銀☗７八玉☖５二金</b></span>
 
-<span style ="color: red"><b>☗５八金　☖９四歩　☗５七銀　☖４三銀</b></span>
+<span style ="color: red"><b>☗５八金☖９四歩☗５七銀☖４三銀</b></span>
 
 <b>（第3図）</b>
 <figure class="zumen">
