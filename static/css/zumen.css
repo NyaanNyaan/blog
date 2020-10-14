@@ -1,0 +1,36 @@
+pre {
+  font-family: Osaka-mono, "MS Gothic", monospace;
+  font-size: 20px;
+}
+code { 
+  font-family: Osaka-mono, "MS Gothic", monospace;
+}
+.zumen {
+  width: 360px;
+  display: inline-block;
+  color: black;
+  background-color: white;
+  font-family : '游明朝','YuMincho','ヒラギノ明朝 ProN W3','Hiragino Mincho ProN','ＭＳ Ｐ明朝','MS Mincho',serif;
+}
+pre.shogizumen {
+  width: 336px; /* +24px */
+  margin:0;
+  padding:0;
+  padding-left: 24px;
+  font-family: Osaka-mono, "MS Gothic", monospace;
+  font-size: 20px;
+  line-height: 1; 
+
+  min-height: 220px;
+}
+.szLastMove { font-weight : bold; }
+.zumen .szLastMove { font-family : '游ゴシック','YuGothic','ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN','ＭＳ Ｐゴシック','MS Gothic',sans-serif; 
+  font-weight : bold; 
+}
+.hdiv:after {
+content: ".";   
+  display: block;   
+  height: 0;   
+  clear: both;   
+  visibility: hidden
+}

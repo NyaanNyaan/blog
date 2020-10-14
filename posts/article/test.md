@@ -22,18 +22,19 @@ draft: false
 | 香 桂 銀 金 玉 金 銀 桂 香|九
 +---------------------------+
 先手の持駒：
+手数＝0　
 </pre>
-</figure>
-
+</figure><br>
 <br><br>
- **【第1図からの指し手】**
+ <b>【第1図からの指し手】</b>
 
-<span style ="color: red">**７六歩(77)　３四歩(33)　２六歩(27)　４四歩(43)**</span>
+<span style ="color: red"><b>☗７六歩　☖３四歩　☗２六歩　☖４四歩</b></span>
 
-<span style ="color: red">**４八銀(39)　４二飛(82)**</span>
+<span style ="color: red"><b>☗４八銀　☖４二飛</b></span>
 
+<b>（第2図）</b>
 <figure class="zumen">
-<figcaption>【第2図】6手目４二飛(82)まで</figcaption>
+<figcaption>【第2図】6手目☖４二飛まで</figcaption>
 <pre class="shogizumen">
 後手の持駒：
   ９ ８ ７ ６ ５ ４ ３ ２ １
@@ -49,21 +50,23 @@ draft: false
 | 香 桂 銀 金 玉 金 ・ 桂 香|九
 +---------------------------+
 先手の持駒：
+手数＝6　△４二飛　まで
 </pre>
-</figure>
+</figure><br>
 四間飛車
 
 <br><br>
-**【第2図からの指し手】**
+ <b>【第2図からの指し手】</b>
 
-<span style ="color: red">**２五歩(26)　３三角(22)　６八玉(59)　７二銀(71)**</span>
+<span style ="color: red"><b>☗２五歩　☖３三角　☗６八玉　☖７二銀</b></span>
 
-<span style ="color: red">**５六歩(57)　３二銀(31)　７八玉(68)　５二金(41)**</span>
+<span style ="color: red"><b>☗５六歩　☖３二銀　☗７八玉　☖５二金</b></span>
 
-<span style ="color: red">**５八金(49)　９四歩(93)　５七銀(48)　４三銀(32)**</span>
+<span style ="color: red"><b>☗５八金　☖９四歩　☗５七銀　☖４三銀</b></span>
 
+<b>（第3図）</b>
 <figure class="zumen">
-<figcaption>【第3図】18手目４三銀(32)まで</figcaption>
+<figcaption>【第3図】18手目☖４三銀まで</figcaption>
 <pre class="shogizumen">
 後手の持駒：
   ９ ８ ７ ６ ５ ４ ３ ２ １
@@ -79,6 +82,7 @@ draft: false
 | 香 桂 銀 金 ・ ・ ・ 桂 香|九
 +---------------------------+
 先手の持駒：
+手数＝18　△４三銀　まで
 </pre>
-</figure>
+</figure><br>
 ユキ式

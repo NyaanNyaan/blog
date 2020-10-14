@@ -3,10 +3,18 @@ languageCode = "ja"
 title = "test title"
 contentDir = "posts"
 theme = "ananke"
+
+[params]
+  body_classes = "avenir bg-near-white"
+  post_content_classes = "code"
+  commentoEnable = true
+  custom_css = ["css/zumen.css"]
+
 [taxonomies]
-tag = "tags"
+  tag = "tags"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
