@@ -5,7 +5,7 @@ draft: false
 tags: ["upsolve"]
 ---
 
-# upsolve(~600) {ignore=true}
+# upsolve(~600)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
