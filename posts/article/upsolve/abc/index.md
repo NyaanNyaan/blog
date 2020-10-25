@@ -11,15 +11,17 @@ tags: ["upsolve"]
 
 <!-- code_chunk_output -->
 
-- [ABC](#abc)
-    - [ABC169-F](#abc169-fhttpsatcoderjpcontestsabc169tasksabc169_f)
-    - [ABC170-F](#abc170-fhttpsatcoderjpcontestsabc170tasksabc170_f)
-    - [ABC175-F](#abc175-fhttpsatcoderjpcontestsabc175tasksabc175_f)
-    - [ABC176-F](#abc176-fhttpsatcoderjpcontestsabc175tasksabc176_f)
-    - [ABC178-F](#abc178-fhttpsatcoderjpcontestsabc178tasksabc178_f)
-    - [ABC180-F](#abc180-fhttpsatcoderjpcontestsabc180tasksabc180_f)
-- [ABC-like](#abc-like)
-    - [AISING2020-E](#aising2020-ehttpsatcoderjpcontestsaising2020tasksaising2020_e)
+- [upsolve(~600)](#upsolve~600)
+  - [ABC](#abc)
+      - [ABC169-F](#abc169-fhttpsatcoderjpcontestsabc169tasksabc169_f)
+      - [ABC170-F](#abc170-fhttpsatcoderjpcontestsabc170tasksabc170_f)
+      - [ABC175-F](#abc175-fhttpsatcoderjpcontestsabc175tasksabc175_f)
+      - [ABC176-F](#abc176-fhttpsatcoderjpcontestsabc175tasksabc176_f)
+      - [ABC178-F](#abc178-fhttpsatcoderjpcontestsabc178tasksabc178_f)
+      - [ABC180-F](#abc180-fhttpsatcoderjpcontestsabc180tasksabc180_f)
+  - [ABC-like](#abc-like)
+      - [AISING2020-E](#aising2020-ehttpsatcoderjpcontestsaising2020tasksaising2020_e)
+      - [HHKB2020-F](#hhkb2020-fhttpsatcoderjpcontestshhkb2020taskshhkb2020_f)
 
 <!-- /code_chunk_output -->
 
@@ -104,3 +106,17 @@ FPSでも解けるようだ。与えられたグラフはパス(孤立点を含�
 というのを強く意識すべきなのかなと思う。
 
 この問題は「ラクダの数は$N$以下なので、左右からそれぞれ貪欲してもラクダの衝突は発生しない」という事実に気が付けばあとは易しい貪欲で解ける。(逆にその事実を使わないと高速に解くことはおそらく出来ない。)**考察を深めなかったのが敗因**。
+
+#### [HHKB2020-F](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_f)
+
+うーんこういう連続的な確率の問題は苦手…本番は「ある区間にmaxとなりうる点が何個あって…」のような発想で$\mathrm{O}(N^2 log^2 N)$を無理やり通したがこれではそのうち足元をすくわれるのでwriter解を履修する。
+
+まず、 **$N$個の変数の$\max$が$x$** という条件がかなり条件として扱いづらい。これを **$\max$が$x$以下のものが$N$個** とうまく置き換えてよしなにすることで式が扱いやすくなる。(典型)
+
+この時、$x \in [L, R)$に対して$\forall i, x_i < x$である確率は$0,1,\frac{x-L_i}{R_i-L_i}$の積で表されるので、これを利用して$f(x) := $ ($\forall i, x_i < x$である確率)が求まる。
+
+更に、確率密度関数を$g(x)$とおく。すると、$\int_0^x g(x) = f(x) \rightarrow g(x) = f'(x)$となり、$[L,R)$における期待値は$\int_L^R xg(x)=\int_L^R xf'(x)$となる。(**ここ重要**)
+
+全体の計算量は、$f(x)$を更新していくことで$\mathrm{O}(N)$個の区間の期待値を各区間ごとに$O(N)$で計算できるので$\mathrm{O}(N^2)$となる。
+
+感想としては確率密度関数周りの処理が慣れてないのでむずいなーという感じ。こういう内容はそのうち数え上げの新ジャンルとして確立される可能性もあるし、問題解いていくうちに慣れていきたいな。
