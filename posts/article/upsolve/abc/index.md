@@ -1,27 +1,27 @@
 ---
-title: "upsolve(AtCoder 600点以下)"
+title: "upsolve ABC級編"
 date: 2020-10-20T12:17:34+09:00
 draft: false
 tags: ["upsolve"]
 ---
 
-# upsolve(~600)
+ABC級のupsolveまとめ。
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [upsolve(~600)](#upsolve~600)
-  - [ABC](#abc)
-      - [ABC169-F](#abc169-fhttpsatcoderjpcontestsabc169tasksabc169_f)
-      - [ABC170-F](#abc170-fhttpsatcoderjpcontestsabc170tasksabc170_f)
-      - [ABC175-F](#abc175-fhttpsatcoderjpcontestsabc175tasksabc175_f)
-      - [ABC176-F](#abc176-fhttpsatcoderjpcontestsabc175tasksabc176_f)
-      - [ABC178-F](#abc178-fhttpsatcoderjpcontestsabc178tasksabc178_f)
-      - [ABC180-F](#abc180-fhttpsatcoderjpcontestsabc180tasksabc180_f)
-  - [ABC-like](#abc-like)
-      - [AISING2020-E](#aising2020-ehttpsatcoderjpcontestsaising2020tasksaising2020_e)
-      - [HHKB2020-F](#hhkb2020-fhttpsatcoderjpcontestshhkb2020taskshhkb2020_f)
+- [ABC](#abc)
+    - [ABC169-F](#abc169-fhttpsatcoderjpcontestsabc169tasksabc169_f)
+    - [ABC170-F](#abc170-fhttpsatcoderjpcontestsabc170tasksabc170_f)
+    - [ABC175-F](#abc175-fhttpsatcoderjpcontestsabc175tasksabc175_f)
+    - [ABC176-F](#abc176-fhttpsatcoderjpcontestsabc175tasksabc176_f)
+    - [ABC178-F](#abc178-fhttpsatcoderjpcontestsabc178tasksabc178_f)
+    - [ABC180-F](#abc180-fhttpsatcoderjpcontestsabc180tasksabc180_f)
+- [ABC-like](#abc-like)
+    - [AISING2020-E](#aising2020-ehttpsatcoderjpcontestsaising2020tasksaising2020_e)
+    - [M-SOLUTIONS2020-E](#m-solutions2020-ehttpsatcoderjpcontestsm-solutions2020tasksm_solutions2020_e)
+    - [HHKB2020-F](#hhkb2020-fhttpsatcoderjpcontestshhkb2020taskshhkb2020_f)
 
 <!-- /code_chunk_output -->
 
@@ -103,9 +103,17 @@ FPSでも解けるようだ。与えられたグラフはパス(孤立点を含�
 
 - **「嘘解法/TLE解法」を投げるより「考察を深める」「自分の解法の計算量を確認する」**
 
-というのを強く意識すべきなのかなと思う。
+というのを強く意識すべきなのかなと思う。(ただし実験してエスパーは有力だと思うので積極的にやる)
 
 この問題は「ラクダの数は$N$以下なので、左右からそれぞれ貪欲してもラクダの衝突は発生しない」という事実に気が付けばあとは易しい貪欲で解ける。(逆にその事実を使わないと高速に解くことはおそらく出来ない。)**考察を深めなかったのが敗因**。
+
+#### [M-SOLUTIONS2020-E](https://atcoder.jp/contests/m-solutions2020/tasks/m_solutions2020_e)
+
+かなり自然に考察したら解けたな、なんでこれ解けなかったんだろう…(コンテスト中は嘘貪欲(beam search)に走って破滅している、なんで？)
+
+たぶん「道は駅のある場所にしか生えない」という点が非自明だったんだと思うし実際雑にググってもだいたいの記事が自明としている。(でも厳密な証明はめんどくさくないか？うーん…) 1次元の場合に成り立つ直感で推し進めるべきだったか？
+
+各頂点の状態を「道がない/縦の道がある/横の道がある」の3つに分けて考えることが出来るというのに気づけば$\mathrm{O}(3^N N^2)$の自明解法が生えて、これを前計算で高速化すると$N$が1個落ちる。
 
 #### [HHKB2020-F](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_f)
 
