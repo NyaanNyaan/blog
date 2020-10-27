@@ -5,6 +5,8 @@ draft: false
 tags: ["math"]
 ---
 
+グラフに関して勉強したことを適宜まとめていく。
+
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -47,10 +49,15 @@ tags: ["math"]
 
   - グラフの次数を降順に並べた列(次数列と呼ぶ)$d_1,\ldots,d_n$が与えられる。この時、条件を満たすグラフが存在する必要十分条件は次の二つである
 
-    - $\sum_{v in V}d_v$ が偶数
+    - $\sum_{v \in V}d_v$ が偶数
     - $\sum_{i=1}^k d_i \leq k(k-1)+\sum_{i=k+1}^n \min(d_i,k)\ (i=1,\ldots n)$
   
-  - 必要性は容易に示せる、十分性は難しいらしい
+  - 必要性は容易に示せる
+    - $d_1,\ldots,d_k$に対応する頂点集合の次数の和の取りうる最大値を考える
+      - 集合の内部同士の全てに辺を張った時、次数は$k(k-1)$増える
+      - 集合の内部から外部の次数$d$の頂点に出来る限り辺を張った時、次数は$\min(d,k)$増える
+      - よって最大値は$k(k-1)+\sum_{k\lt j} \min(d_j,k)$になる
+  - 十分性は難しいらしい
 
 ## 二部グラフ
 
@@ -93,7 +100,7 @@ tags: ["math"]
   - すると条件を満たす構築は$A$をカバーするマッチングと一致する
   - よって$\forall S\subset A,|S|\leq |\Gamma(S)|$を示せればよい
   - $S$には$4|S|$枚のカードが含まれ、一つのカードは$4$枚しかないので種類数が$|S|$未満だと矛盾、よって少なくとも$|S|$種類の数字が存在する
-  - よって$|S|\leq|\Gamma(S)|$、よって示された
+  - よって$|S|\leq|\Gamma(S)|$が示された
 
 #### 例題2
 
@@ -120,7 +127,7 @@ tags: ["math"]
     - よって全ての列は4マス揃わないので引き分けに持ち込める
   - 同様の方法で先手も負けることはない。よって両者が最善を尽くすと引き分けになる
 
-- [参考1(電通大の講義資料)](http://dopal.cs.uec.ac.jp/okamotoy/lect/2019/gn/lect05.pdf) [参考2(高校数学の美しい物語)](https://mathtrain.jp/hall)
+- [参考1(電通大の講義資料)](http://dopal.cs.uec.ac.jp/okamotoy/lect/2019/gn/lect05.pdf)　[参考2(高校数学の美しい物語)](https://mathtrain.jp/hall)
 
 ## 数え上げ
 
@@ -174,6 +181,8 @@ $$T(n)=n^{n-2}$$
 #### 形式的冪級数
 
 - ラグランジュの反転公式は関数$f(\omega)=x$に対して$g(x)=\omega$である逆関数を求める公式
+
+- 数え上げでは主に次の2つしか使わない(らしい)
 
   - (1)$f(\omega) = \frac{\omega}{\phi(\omega)}$であるとき任意の関数$H$に対して
   $$[x^n]H(g(x))=\frac{1}{n}[\omega^{n-1}]\left(H(\omega)'\phi(\omega)^n\right)$$
