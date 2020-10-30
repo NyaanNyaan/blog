@@ -66,13 +66,24 @@ tags: ["math"]
 
 - 基本例だけ書いておく($x,y,w$で$x$から$y$の向きに流量$w$の辺を貼るという意味)
 
-|  制約  | 辺の張り方  |
-| ---- | ---- |
-|  $x$が赤で$y$が青だと$w$失う  |  $(x,y,w)$  |
-|  $x$が赤だと$w$失う  |  $(x,T,w)$  |
-|  $x$が青だと$w$失う  |  $(S,x,w)$  |
-|  $x$,$y$が両方赤だと$w$得る  |  頂点$U$を追加<br>無条件で$w$得る<br>$(S,U,w)$<br>$(U,x,\infty)$<br>$(U,y,\infty)$  |
-|  $x$,$y$が両方青だと$w$得る  |  頂点$U$を追加<br>無条件で$w$得る<br>$(U,T,w)$<br>$(U,x,\infty)$<br>$(U,y,\infty)$  |
+- $x$が赤で$y$が青だと$w$失う
+  - $(x,y,w)$
+
+- $x$が赤だと$w$失う
+  - $(x,T,w)$
+
+- $x$が青だと$w$失う
+  - $(S,x,w)$
+
+- $x$,$y$が両方赤だと$w$得る
+  - 頂点$U$を追加
+  - 無条件で$w$得る
+  - $(S,U,w),(U,x,\infty),(U,y,\infty)$
+
+- $x$,$y$が両方青だと$w$得る
+  - 頂点$U$を追加
+  - 無条件で$w$得る
+  - $(U,T,w),(U,x,\infty),(U,y,\infty)$
 
 - 他にも色々なケースがある [参考1](https://ferin-tech.hatenablog.com/entry/2019/10/28/%E7%87%83%E3%82%84%E3%81%99%E5%9F%8B%E3%82%81%E3%82%8B%E5%95%8F%E9%A1%8C) [参考2](https://ei1333.github.io/luzhiled/snippets/memo/project-selection.html)
 
