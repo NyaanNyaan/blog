@@ -33,6 +33,8 @@ tags: ["math"]
     - [double counting](#double-counting)
     - [形式的冪級数](#形式的冪級数)
     - [ケイリーの公式の派生版](#ケイリーの公式の派生版)
+  - [行列木定理(Kirchhoff's theorem)](#行列木定理kirchhoffs-theorem)
+  - [完全マッチングの数え上げ](#完全マッチングの数え上げ)
 
 <!-- /code_chunk_output -->
 
@@ -309,8 +311,47 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 #### ケイリーの公式の派生版
 
 - 一般化ケイリーの公式
-  - $n$頂点、$k$個の連結成分からなり、頂点$1$から頂点$k$が異なる連結成分に属するようなラベル付き森の個数は$k n^{n-k-1}$
+  - $n$頂点、$k$個の連結成分からなり、頂点$1$から頂点$k$が異なる連結成分に属するようなラベル付き森の個数は$T_{n,k}=k n^{n-k-1}$
+  - 証明：double countingで考える
+  - $1$から$K$を根とする頂点ラベル・辺ラベル付き森の個数は？
+  - (1) ラベル付き森に根をつける… $T_{n,k} (n-k)!$個
+  - (2) $n$頂点の辺のないグラフからスタートして$n-k$本のラベル付き辺を辺$1$から辺$n-k$まで順に貼る
+    $i$本目は$n(n-i)$通りあるので全体で$n^{n-k} \frac{(n-1)!}{(k-1)!}$通り
+  - そのうち根が$1$から$k$であるものは全体の$\frac{1}{\ _n C_k\ }=\frac{k!(n-k)!}{n!}$なので、
+  $$n^{n-k} \frac{(n-1)!}{(k-1)!}\cdot \frac{k!(n-k)!}{n!}=kn^{n-k-1}(n-k)!$$
+  - (1)(2)より $T_{n,k}=k n^{n-k-1}$を得る
 
 - 次数制限付きケイリーの公式
   - 次数列が$d_1,d_2,\ldots,d_n(\sum_k d_k=2n-2)$で表される$n$頂点のラベル付き木の個数は
   $$\frac{(n-2)!}{(d_1-1)!\ldots (d_n-1)!}$$
+
+### 行列木定理(Kirchhoff's theorem)
+
+- 無向グラフ$G$に対してラプラシアン行列$L=(l_{ij})$を
+$$l_{ij}=\begin{cases}\deg(v_i) & i=j \newline -1 & i \neq j \ \mathrm{and}\ v_i\ \mathrm{is}\ \ \mathrm{adjacent}\ \mathrm{to}\ v_j \newline 0 & \mathrm{otherwise} \end{cases}$$
+  により定める
+
+- この時、$L$の余因子はグラフの全域木の個数に等しい。これを行列木定理と呼ぶ
+
+- また、$L$の固有の$0$の個数はグラフ$G$の連結成分の個数と一致する
+
+### 完全マッチングの数え上げ
+
+- 部集合$A,B$がともに$|A|=|B|=n$である二部グラフ$G$の完全マッチングを数える
+
+- 完全マッチングについて、$A$の$i$番目と$B$の$\sigma(i)$番目が対応していると考えると$\sigma$は順列になる
+
+- よって行列$M=m_{i,j}$を$m_{i,j}$が$A_i$と$B_j$の間の辺の本数と等しくなるように定めると、完全マッチングの個数は$M$のパーマネント
+$$\mathrm{perm}\ M = \sum_\sigma \Pi m_{i,\sigma(i)}$$
+と等しくなる
+
+- パーマネントの計算は$n$に対して指数時間かかるが、偶奇だけなら
+$$\det M\sum_\sigma\mathrm{sgn}(\sigma) \Pi m_{i,\sigma(i)}$$
+と一致するので、掃き出し法+bitset高速化により$\mathrm{O}\left(\frac{n^3}{w}\right)$で計算できる
+
+- また、ハフニアンと呼ばれる量とも関係しており、$$\mathrm{perm}\ M = \mathrm{haf} \left(\begin{array}{cc} O & M \newline M^T & 0 \end{array}\right)$$
+という関係が知られている。[参考](https://mathtrain.jp/pfaffian)
+
+- (このテーマは理解してない部分も多い)
+  - [ここ](http://dopal.cs.uec.ac.jp/okamotoy/lect/2020/dme/)の第5回で取り上げられそうなので来週読む
+  - TODO：[Hafnian of Matrix(Library Checker)](https://judge.yosupo.jp/problem/hafnian_of_matrix)を解く
