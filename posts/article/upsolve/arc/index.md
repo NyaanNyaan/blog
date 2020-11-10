@@ -1,16 +1,17 @@
 ---
-title: "ARC"
+title: "ARC,AGC"
 date: 2020-10-26T17:22:45+09:00
 draft: false
 tags: ["upsolve"]
 ---
 
-ARC級のupsolveまとめ。
+ARC,AGC級のupsolveまとめ。
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 <!-- code_chunk_output -->
 
 - [ARC](#arc)
+    - [ARC104-F](#arc104-fhttpsatcoderjpcontestsarc104tasksarc104_f)
     - [ARC105-F](#arc105-fhttpsatcoderjpcontestsarc105tasksarc105_f)
     - [ARC106-E](#arc106-ehttpsatcoderjpcontestsarc106tasksarc106_e)
     - [ARC107-E](#arc107-ehttpsatcoderjpcontestsarc107tasksarc107_e)
@@ -19,6 +20,18 @@ ARC級のupsolveまとめ。
 <!-- /code_chunk_output -->
 
 ## ARC
+
+#### [ARC104-F](https://atcoder.jp/contests/arc104/tasks/arc104_f)
+
+コンテスト中はずっと33AC 1TLEで、コンテスト中にコードを3文字変えたら通って発狂した問題。解法がかなり惜しかったのは事実だけど、冷静さを失ってしまって30分時間を無駄にしたのはひどかった…
+
+考察部分はほとんど上手くいっていて、一つの数列に複数の遷移が対応する数え上げの問題では**一つの状態に対して一意に定まるパラメータを設定する**という典型テクニックをすぐに使えたのは非常によかった。反省点としてやはり計算量解析が挙げられる。コンテスト中は計算量をおろそかにしたせいで自分の4乗解法が3乗解法だと勘違いしてしまい、定数倍改善を闇雲に連投して時間を浪費してしまった。(落ち着いて考えれば自分の解法が$\mathrm{\Theta}(N^2 X^2))$なのは明らかだった…)
+まとめると、
+
+- **1ケースWAでも本質的な誤りがある可能性があるので冷静さを失わない**
+- **TLEが出たら計算量解析を見直す**
+
+といったところか。
 
 #### [ARC105-F](https://atcoder.jp/contests/arc105/tasks/arc105_f)
 
