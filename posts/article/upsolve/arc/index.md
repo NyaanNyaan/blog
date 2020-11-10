@@ -13,6 +13,8 @@ ARC級のupsolveまとめ。
 - [ARC](#arc)
     - [ARC105-F](#arc105-fhttpsatcoderjpcontestsarc105tasksarc105_f)
     - [ARC106-E](#arc106-ehttpsatcoderjpcontestsarc106tasksarc106_e)
+    - [ARC107-E](#arc107-ehttpsatcoderjpcontestsarc107tasksarc107_e)
+    - [ARC107-F](#arc107-fhttpsatcoderjpcontestsarc107tasksarc107_f)
 
 <!-- /code_chunk_output -->
 
@@ -73,4 +75,20 @@ $|S|K \leq D - g(\lbrace1,\ldots,N\rbrace / S)$
 
 [提出](https://atcoder.jp/contests/arc106/submissions/17673992)　($\log$1個計算量を落とすのをサボっているため実行時間がかなり遅い。)
 
+#### [ARC107-E](https://atcoder.jp/contests/arc107/tasks/arc107_e)
 
+解説を見て唖然とした問題。
+
+こういう**実験しないと相当解けないが、実験すると容易にエスパー出来る**問題は**解けないとパフォが難易度以上に下がる**というイメージがあり…　
+
+結局**構築は性質がわからなかったら実験を書く**というのが本質なのか…ただ、Dを解くのが遅れて焦ったのとEで初手$0$とそれ以外に分けてしまって沼にハマったのでやむを得ない面も少しはある。落ち着いていれば実験が書けた気もする、平常心大事！
+
+#### [ARC107-F](https://atcoder.jp/contests/arc107/tasks/arc107_f)
+
+解けなくてかなり悔しい思いをした問題。ACL2で使用されなかった問題が流用されると踏んで直前にフローを勉強していただけに通したかった…
+
+とはいえもう少し時間を掛けられれば自分で解けた可能性もある気がする。Eに時間の大半を取られたのが痛かった…
+
+まあただフローの初手の「二つの状態に塗り分ける」と言い換える部分で詰まってしまったのは反省。コンテスト中は$B_i$がプラスかマイナスかで言い換えようとして破綻していたがそれでは当然$S$か$T$かを選ぶ問題にはならない。
+
+少し考えると$+1$倍か$-1$倍かを選ぶ二部グラフにすればうまくいくとわかり、結局$+1$,$-1$,削除の三択を選ぶ問題になるのであとは[ここ](https://nyaannyaan.github.io/blog/article/math/flow/#3%E3%81%A4%E3%81%AE%E7%8A%B6%E6%85%8B%E3%81%AB%E5%89%B2%E3%82%8A%E6%8C%AF%E3%82%8B)に書いたアルゴリズムを使用すれば解ける。うーん通したかったなあ…

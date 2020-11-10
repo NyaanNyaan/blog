@@ -1,6 +1,6 @@
 baseURL = "https://nyaannyaan.github.io/blog"
 languageCode = "ja"
-title = "test title"
+title = "Living with OFUTON"
 contentDir = "posts"
 theme = "ananke"
 
@@ -16,4 +16,3 @@ theme = "ananke"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-

@@ -35,6 +35,8 @@ tags: ["math"]
     - [ケイリーの公式の派生版](#ケイリーの公式の派生版)
   - [行列木定理(Kirchhoff's theorem)](#行列木定理kirchhoffs-theorem)
   - [完全マッチングの数え上げ](#完全マッチングの数え上げ)
+    - [二部グラフの場合](#二部グラフの場合)
+    - [一般のグラフの場合](#一般のグラフの場合)
 
 <!-- /code_chunk_output -->
 
@@ -337,6 +339,8 @@ $$l_{ij}=\begin{cases}\deg(v_i) & i=j \newline -1 & i \neq j \ \mathrm{and}\ v_i
 
 ### 完全マッチングの数え上げ
 
+#### 二部グラフの場合
+
 - 部集合$A,B$がともに$|A|=|B|=n$である二部グラフ$G$の完全マッチングを数える
 
 - 完全マッチングについて、$A$の$i$番目と$B$の$\sigma(i)$番目が対応していると考えると$\sigma$は順列になる
@@ -349,10 +353,14 @@ $$\mathrm{perm}\ M = \sum_\sigma \Pi m_{i,\sigma(i)}$$
   - 行列式
   $$\det M=\sum_\sigma\mathrm{sgn}(\sigma) \Pi m_{i,\sigma(i)}$$
   は$\mod 2$を取るとパーマネントと一致するので、掃き出し法+bitset高速化により$\mathrm{O}\left(\frac{n^3}{w}\right)$で計算できる($w$はワードサイズ)
+- [関連資料](http://dopal.cs.uec.ac.jp/okamotoy/lect/2020/dme/lect05.pdf)
 
-- また、ハフニアンと呼ばれる量とも関係しており、$$\mathrm{perm}\ M = \mathrm{haf} \left(\begin{array}{cc} O & M \newline M^T & 0 \end{array}\right)$$
-という関係が知られている。[参考](https://mathtrain.jp/pfaffian)
+#### 一般のグラフの場合
 
-- (このテーマは理解してない部分も多い)
-  - [ここ](http://dopal.cs.uec.ac.jp/okamotoy/lect/2020/dme/)の第5回で取り上げられそうなので来週読む
-  - TODO：[Hafnian of Matrix(Library Checker)](https://judge.yosupo.jp/problem/hafnian_of_matrix)を解く
+- サイズ$2n$の正方行列$A$に対してハフニアン$\mathrm{haf}(A)$は次のように定められる
+$$\mathrm{haf}(A) = \sum_{\sigma \in C_{2n}}\Pi_{i=1}^n A_{\sigma(2i-1),\sigma(2i)}$$
+ただし$C_{2n}$は$\forall i,C_{2i-1} \lt C_{2i+1}$かつ$\forall i,C_{2i-1}\lt C_{2i}$を満たす順列の集合
+- サイズ$2n$のグラフ$G(V,E)$に対して$(a_{ij})=[(i,j)\in E]$となるような行列を$A$とおくと、$G$の完全マッチングの個数は$\mathrm{haf}(A)$に一致する
+  - $\mathrm{haf}(A)$の計算では全ての完全マッチングに対応する$a$の積が1回ずつ足されている
+- TODO：[Hafnian of Matrix(Library Checker)](https://judge.yosupo.jp/problem/hafnian_of_matrix)を解く
+  - [論文](https://arxiv.org/pdf/1107.4466.pdf)　読解にinf回挫折している…
