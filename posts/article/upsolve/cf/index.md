@@ -1,5 +1,5 @@
 ---
-title: "ARC,AGC"
+title: "CodeForces"
 date: 2020-10-26T17:22:45+09:00
 draft: false
 tags: ["upsolve"]
