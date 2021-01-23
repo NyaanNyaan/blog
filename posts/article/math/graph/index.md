@@ -397,10 +397,10 @@ $$\mathrm{haf}(A) = \sum_{\sigma \in C_{2n}}\Pi_{i=1}^n A_{\sigma(2i-1),\sigma(2
     - $\lbrace {1,2,\ldots,m}\rbrace$の部分集合全てを要素に持つ集合を$[m]$と表す
     - $[m]$の部分集合全てに対して環を拡張したものを$R[U_m]$とおく
       - この辺の正しい表現が分からない…イメージとしては$2^m$次のFPSだと思っておけばいい
-    - $X$に関連する値を$r_X$のようにおき、$r\in R[U_m]$に対して
-    $$r=\sum_{X\subseteq [m]}r_X[X]$$
+    - 集合$S$に関連する値を$r_S$のようにおき、$r\in R[U_m]$に対して
+    $$r=\sum_{S\subseteq [m]}r_S[S]$$
     のように表す
-      - イメージとしてはいつものFPSの「$2$次の項は$2x^2$」が「$X$に関連する項は$r_X[X]$」に置き換わったイメージ
+      - イメージとしてはいつものFPSの「$2$次の項は$2x^2$」が「$S$に関連する項は$r_S[S]$」に置き換わったイメージ
     - 加法を$+$、乗法を[subset convolution](https://nyaannyaan.github.io/library/set-function/subset-convolution.hpp)で定義する
       - $1[\phi]$が乗法的単位元になる
   - ハフニアンの求め方
