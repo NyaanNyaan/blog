@@ -10,13 +10,14 @@ tags: ["upsolve"]
 <!-- code_chunk_output -->
 
 - [Div.1](#div1)
-  - [#679-C](#679-chttpscodeforcescomcontest1444problemc)
+    - [#679-C](#679-chttpscodeforcescomcontest1444problemc)
+    - [#681-D](#681-dhttpscodeforcescomcontest1442problemd)
 
 <!-- /code_chunk_output -->
 
 ## Div.1
 
-### [#679-C](https://codeforces.com/contest/1444/problem/C)
+#### [#679-C](https://codeforces.com/contest/1444/problem/C)
 
 3分ほど間に合わなくて通せなかった問題。Dが通せたのでレートは増えたものの悔しい…
 
@@ -25,6 +26,6 @@ tags: ["upsolve"]
 
 というドドド典型を度忘れして30分ほど迷走していたのが致命傷だった。これさえ見えればあとはRollback UFを使うだけの軽実装問題なので落としたのがかなり勿体ない…しっかり頭に入れておきたい。
 
-- [#681-D](https://codeforces.com/contest/1442/problem/D)
+#### [#681-D](https://codeforces.com/contest/1442/problem/D)
 
 この問題はかなり難しく、さらに考察の初手でそっぽに行ってしまったため解けないのはしょうがなかった面はある。とはいえ1時間くらい嘘解法を投げ続けていたのはひどかった…反省。
