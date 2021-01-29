@@ -95,7 +95,7 @@ $[$条件文$]$は条件文が真の時に1、偽の時に0である値とする
 |$0,1,0,1,0,\ldots$|$$[n\ \mathrm{is}\ \mathrm{odd}]$$|$\frac{e^x-e^{-x}}{2}$|
 ||||
 |$a_k,a_{k+1},a_{k+2},\ldots$|$a_{n+k}$|$\left(\frac{d}{dx}\right)^kA(x)$|
-|$0,a_0,\frac{a_1}{2},\frac{a_2}{3},\ldots$|$\frac{a_{n-1}}{n}$|$xA(x)$|
+|$0,a_0,2a_1,3a_2,\ldots$|$\frac{a_{n-1}}{n}$|$xA(x)$|
 ||$\sum_{i+j=n}a_ib_j\ _nC_i$|$A(x)B(x)$|
 ||$\sum_{\sum i_k=n}\Pi {(a_k)}_{i_k}\cdot\binom{n}{i_0,i_1,\ldots}$|$\Pi A_k(x)$|
 ||$\sum_i a_i\cdot i^n$　($A$はOGF)|$A(e^x)$|
