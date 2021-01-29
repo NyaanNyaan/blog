@@ -328,7 +328,7 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 - 次数制限付きケイリーの公式
   - 次数列$d_1,d_2,\ldots,d_n(d_i > d_j)$に対して、頂点$i$の次数が$d_i$であるような$n$頂点のラベル付き木の個数は
   $$\frac{(n-2)!}{(d_1-1)!\ldots (d_n-1)!}$$
-  - 証明：数学的帰納法
+  - 証明1：数学的帰納法
     - $N \geq 3$の時を帰納的に示せばよい
     - $\sum_i d_i = 2N-2 < 2N$かつ$\forall (i,j), d_i \geq d_j$より$d_N=1$が従う
     - よって頂点$N$および頂点$N$の隣接する辺を取り除いたグラフも$N-1$頂点の木になる
@@ -344,6 +344,10 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
     $$=(2n-3-(n-1))\cdot\frac{(n-3)!}{\Pi_{1\leq j\leq n}(d_j-1)!}$$
     $$= \frac{(n-2)!}{\Pi_{1\leq j\leq n}(d_j-1)!}$$
     となり、以上より示された
+  - 証明2: Pruefer Code
+    - Pruefer Codeにおいて頂点$i$の次数は(列での$i$の出現回数)+1
+    - よって多項定理から$\frac{n-2}{\Pi_i (d_i-1)}$が容易に従う
+    - [参考:37zigenさんのPruefer Codeの記事](https://37zigen.com/prufer-code/)
   
 ### 行列木定理(Kirchhoff's theorem)
 
