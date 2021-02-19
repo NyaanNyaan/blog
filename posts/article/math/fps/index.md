@@ -107,40 +107,51 @@ $[$条件文$]$は条件文が真の時に1、偽の時に0である値とする
 #### 概要
 
 (1)$f(\omega) = \frac{\omega}{\phi(\omega)}$であるとき任意の関数$H$に対して
-$[x^n]H(g(x))=\frac{1}{n}[\omega^{n-1}]\left(H(\omega)'\phi(\omega)^n\right)$
+
+$$[x^n]H(g(x))=\frac{1}{n}[\omega^{n-1}]\left(H(\omega)'\phi(\omega)^n\right)$$
+
 とくに$H$が恒等写像のとき
-$[x^n]g(x)=\frac{1}{n}[\omega^{n-1}]\phi(\omega)^n$
+
+$$[x^n]g(x)=\frac{1}{n}[\omega^{n-1}]\phi(\omega)^n$$
 
 (2)関数$g(x)$が$g(x) = a + x\phi(g(x))$を満たすとき、
-$[x^n]g(x) = \frac{1}{n!} \left|\frac{d^{n-1}}{d \omega ^{n-1}} \left(\phi(\omega)^n\right)\right|_{\omega=a}$
+
+$$[x^n]g(x) = \frac{1}{n!} \left|\frac{d^{n-1}}{d \omega ^{n-1}} \left(\phi(\omega)^n\right)\right|_{\omega=a}$$
+
 特に$g(x) = x\ \phi(g(x))$のとき
-$[x^n]g(x)=\frac{1}{n}[\omega^{n-1}]\phi(\omega)^n$
+
+$$[x^n]g(x)=\frac{1}{n}[\omega^{n-1}]\phi(\omega)^n$$
 
 #### 例題
 
 ##### 例1 カタラン数
 (カタラン数の母関数)=$C(x),F(x)=C(x)-1$とおくと
-$F(x) = x(F(x) + 1)^2$
+
+$$F(x) = x(F(x) + 1)^2$$
+
 となり、上の公式に$\phi(\omega)=(\omega +1)^2, a=0$を代入したものになる。よって
-$[x^n]F(x) = \frac{1}{n} [\omega^{n-1}](\omega+1)^{2n}= \frac{1}{n+1} \ _{2n}C_{n}$
+
+$$[x^n]F(x) = \frac{1}{n} [\omega^{n-1}](\omega+1)^{2n}= \frac{1}{n+1} \binom{2n}{n}$$
+
 が従う。
 
 ##### 例2 N頂点の根付き木の数え上げ(ケイリーの公式)
+
 $n$頂点からなる根付き木の総数を$R_n$とおく。
 $R_n$の値を根とつながっている子の個数ごとで場合分けして数え上げる。
-子が0個のとき $[n=1]$
-子が1個のとき $n\cdot R_{n-1}$
-子が2個のとき $\frac{n}{2!}\sum_{i+j=n-1}R_iR_j \ _{n-1}C_i$
-子が3個のとき $\frac{n}{3!}\sum_{i+j+k=n-1}R_iR_jR_k 
-\left(\begin{array}{c}
-n-1 \\
-i,j,k \\
-\end{array}\right)$
+- 子が0個のとき $[n=1]$
+- 子が1個のとき $n\cdot R_{n-1}$
+- 子が2個のとき $\frac{n}{2!}\sum_{i+j=n-1}R_iR_j \ _{n-1}C_i$
+- 子が3個のとき $\frac{n}{3!}\sum_{i+j+k=n-1}R_iR_jR_k\binom{n-1}{i,j,k}$
 ...
 ここで$R(n)$のEGFを$F(x)$とおくと
-$R_n=n[x^{n-1}]\left(1 + F(x)+\frac{F(x)^2}{2!}+\frac{F(x)^3}{3!}+\ldots\right) = n([x^{n-1}]e^{F(x)})$
+
+$$R_n=n[x^{n-1}]\left(1 + F(x)+\frac{F(x)^2}{2!}+\frac{F(x)^3}{3!}+\ldots\right) = n[x^{n-1}]e^{F(x)}$$
+
 よって$F(x)=xe^{F(x)}$が従う。
 よって$R_n$はラグランジュの反転公式に$\phi(\omega)=e^\omega,a=0$を代入すれば求まり、
-$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1}$
+
+$$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1}$$
+
 となる。
 また、$n$頂点の根無し木1個につき$n$個の根の選び方が存在することから、$n$頂点の根無し木の個数は$n^{n-2}$とわかる。(ケイリーの公式)
