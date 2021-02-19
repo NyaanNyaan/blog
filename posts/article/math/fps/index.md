@@ -25,6 +25,7 @@ draft: false
     - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2)
     - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
       - [似て非なる問題 (自作)](#似て非なる問題-自作)
+      - [VK Cup](#vk-cuphttpscodeforcescomcontest923probleme)
 
 <!-- /code_chunk_output -->
 
@@ -347,7 +348,7 @@ $$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\su
 > 長さ$N$の交代順列の個数を求めよ。
 
 長さ$N$の交代順列のうち不等号の順番が<><><><>...となるものの個数を$\mathrm{dp}_N$と置いてDP遷移を考える。
-(便宜上$\mathrm{dp}_0=\mathrm{dp}_1=1$とおく。)
+(便宜上$\mathrm{dp} _ 0 = \mathrm{dp} _ 1 = 1$とおく。)
 $n$を左から$i+1(0 \leq i < n)$個目に置いたときの全ての交代順列の個数は($n-1$個から左に置く$i$個を選ぶ)$\cdot$(左の$i$個が交代順列)$\cdot$(右の$n-i-1$個が交代順列)なので
 $$\binom{n-1}{i} \mathrm{dp} _ i \mathrm{dp} _ {n-i-1} \cdot \frac{1}{2}$$
 となる。
@@ -403,4 +404,3 @@ $$=\sum_{n=0}^\infty \frac{1}{n!}x^n \sum_{i=0}^N a_i i^n = F(x)$$
 という恒等式を得る。
 
 この式log1個でどうやって計算するんだ…(は？)(出来たと思うんだけど、忘れた…勘違いかも)
-
