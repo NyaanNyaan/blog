@@ -247,7 +247,7 @@ $$P(x) = e^x - \sum_{k = 1}^{\lfloor \frac{1}{w} \rfloor}(-1)^{k-1}\left(\frac{(
 $$P\left(\frac{L_i}{L}x\right) = e^{\frac{L_i}{L}x} - \sum_{k = 1}^{\lfloor \frac{L_i}{K} \rfloor}(-1)^{k-1}\left(\frac{(\frac{L_i-kK}{L})^k}{k!}x^k  + \frac{(\frac{L_i-kK}{L})^{k-1}}{(k-1)!}x^{k-1} \right)e^{\frac{L_i-kK}{L}x}$$
 
 となる。以下はGachaponと同様に$e^x - \prod_i P\left(\frac{L_i}{L}x\right)$の係数の和を計算すればよい。
-(実装によっては$k = 1, K = L_i$の時に右辺が$0$にならずバグるので要注意。)
+(実装によっては$k = 1, K = L_i$の時に第二項が$0$にならずバグるので要注意。)
 
 ##### [luogu4707　重返現世](https://www.luogu.com.cn/problem/P4707)
 
