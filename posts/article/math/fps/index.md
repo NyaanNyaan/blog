@@ -17,12 +17,20 @@ draft: false
     - [例題](#例題)
       - [例1 カタラン数](#例1-カタラン数)
       - [例2 N頂点の根付き木の数え上げ(ケイリーの公式)](#例2-n頂点の根付き木の数え上げケイリーの公式)
+- [問題集](#問題集)
+    - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
+    - [UOJ0424 count](#uoj0424-count)
+      - [解法1 通常型母関数](#解法1-通常型母関数)
+      - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
+    - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2)
+    - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
+      - [似て非なる問題 (自作)](#似て非なる問題-自作)
 
 <!-- /code_chunk_output -->
 
 ## FPS/多項式ライブラリの解説まとめ
 
-自分のライブラリ解説へのリンク集(解説を書いてないものはリンク無し)
+自分のライブラリ解説へのリンク集。(解説を書いてないものはリンク無し) 部分分数分解とEulerian Number以外は実装がライブラリに存在する。
 
 - 基本演算
   - [四則演算/剰余/逆元/累乗/指数関数/対数関数](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)
@@ -38,6 +46,7 @@ draft: false
   - [常微分方程式](https://nyaannyaan.github.io/library/fps/differential-equation.hpp)
   - [$\frac{1}{f(x)} \mod g(x)$, 多項式GCD](https://nyaannyaan.github.io/library/fps/polynomial-gcd.hpp)
   - $f(x)^k \mod g(x)$
+  - $\prod_i f_i(x)$
   - [階乗 $\mod p$](https://nyaannyaan.github.io/library/modulo/factorial.hpp)
   - 有名数列(スターリング数/ベル数/ベールヌイ数/分割数/Eulerian number)
   - [$\sum_i a^if(i)$](https://nyaannyaan.github.io/library/fps/sum-of-exponential-times-poly.hpp)
@@ -106,6 +115,8 @@ $[$条件文$]$は条件文が真の時に1、偽の時に0である値とする
 
 #### 概要
 
+数え上げでは主に以下の二つの公式が出てくる。
+
 (1)$f(\omega) = \frac{\omega}{\phi(\omega)}$であるとき任意の関数$H$に対して
 
 $$[x^n]H(g(x))=\frac{1}{n}[\omega^{n-1}]\left(H(\omega)'\phi(\omega)^n\right)$$
@@ -131,7 +142,7 @@ $$F(x) = x(F(x) + 1)^2$$
 
 となり、上の公式に$\phi(\omega)=(\omega +1)^2, a=0$を代入したものになる。よって
 
-$$[x^n]F(x) = \frac{1}{n} [\omega^{n-1}](\omega+1)^{2n}= \frac{1}{n+1} \binom{2n}{n}$$
+$$[x^n]F(x) = \frac{1}{n} \lbrack\omega^{n-1}\rbrack(\omega+1)^{2n}= \frac{1}{n+1} \binom{2n}{n}$$
 
 が従う。
 
@@ -155,3 +166,238 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 
 となる。
 また、$n$頂点の根無し木1個につき$n$個の根の選び方が存在することから、$n$頂点の根無し木の個数は$n^{n-2}$とわかる。(ケイリーの公式)
+
+## 問題集
+
+- 形式的冪級数の式変形の部分にポイントが置かれている印象の問題をここにまとめる。
+
+#### [CF 865G](https://codeforces.com/problemset/problem/865/G)
+
+> $n$種類の花びらと$m$種類のお菓子箱があり、$i$番目の花には$p_i$枚の花弁が、$j$番目の箱には$c_i$枚のチョコレートが入っている。
+> $N$本の花とチョコレートをそれぞれ一列に並べる。この時、花びらの枚数とチョコレートの枚数が一致するようにする。条件を満たす並べ方は何通り？$\pmod{10^9+7}$
+> 
+> $n\leq 10,m\leq 100,p_i \leq 10^9,N \leq 10^{18}, c_i \leq 250$
+
+$$P(x) = (\sum_i p_ix)^N, Q(x) = \frac{1}{1 - \sum_i x^{c_i}}$$
+
+とおくと、答えは$\sum_i [x^i]P(x)^N \cdot [x^i]Q(x)$になる。
+
+ここで$k = \max(c)$とおくと、Fiduccia's algorithmより$[x^i]Q(x)$は$x^i \mod \mathrm{rev}(Q)$の係数と$[x^i]Q(x),i \lt k$の内積で表されるとわかるので、$P(x)^N \mod \mathrm{rev}(Q)$を計算すれば容易に答えが求まる。
+
+- 初めは以下のように解いたが答えが合わない、どこか間違えているらしい…
+> (P,Qの定義までは同じ。)これを計算できる形に変えるために$Q$に$x\leftarrow \frac{1}{x}$を代入すると
+> $$\sum_i [x^i]P(x)^N \cdot \lbrack x^{-i}\rbrack Q(x^{-1}) = [x^0] P(x)^N Q(x^{-1}) = \frac{P(x)}{1 - \sum_i x^{-c_i}}$$
+> $k = \max(c)$とおくと
+> $$= [x^k] \frac{P(x)^N}{x^k - \sum_i x^{k-c_i}}$$
+> と変形出来て、上式はFiduccia's algorithmで計算できる。
+
+#### UOJ0424 count
+
+> 長さが$N$であり、$1$以上$M$以下の整数から構成されて、かつ$1$から$M$までの全ての整数が数列内に登場する数列を良い数列と呼ぶ。
+> 良い数列$a$に対して、$f_a(l,r)$を$a$の$l$番目から$r$番目の整数のうち最大値の添え字とする。(最大値が複数ある場合は最小の添え字を取る。)
+> 二つの良い数列$a,b$に対して、任意の$1 \leq i \leq j \leq N$において$f_a(i,j) = f_b(i,j)$が成り立つ時、が$a$と$b$が同型であると言う。
+> $N$と$M$が与えられるので、同型でない数列がいくつかあるかを数え上げて$998244353$で割った余りを求めよ。
+> $M \leq N \leq 10^6$
+
+この問題は包除原理を使えば見通しよく解くことが出来るが(鏡像法)、冪級数を用いた解法を紹介する。[参考(解法1)](https://www.cnblogs.com/Mr-Spade/p/10215081.html)　[参考(解法2)](https://www.luogu.com.cn/blog/EntropyIncreaser/sheng-cheng-han-shuo-di-bai-gei)
+
+Cartesian Treeを考えることでこの問題は特定の条件を満たす頂点数$N$の二分木の数え上げに帰着する。
+構築されたCartesian Treeは左の子は自分より小さく、右の子は自分以下になる。よって$M$以下の整数という条件を満たす二分木は
+$\mathrm{len}(x) :=${頂点$x$から開始して左の子へ移動することを繰り返す時の操作回数}としたとき、$\max(\mathrm{len}(x))\lt M$という性質を持つ。
+
+
+$d_{i,j}:=${$\max(\mathrm{len}(x))\lt i$、頂点数$j$の場合の数}とする愚直DPを考えると
+
+$$d_{1,j} = 1, d_{i,j} = \sum_{k=0}^{i-1}d_{i-1,k}d_{i,j-1-k}$$
+
+となる。ここから通常型母関数$F_i = \sum_j d_{i,j} x^j$を考えると
+
+$$F_1 = \frac{1}{1-x},  F_i = \frac{1}{1-F_{i-1}x}$$
+
+という漸化式を得る。
+
+##### 解法1 通常型母関数
+
+$$F_i(x) = \frac{P_i(x)}{Q_i(x)}$$
+
+とおくと$\frac{P_i}{Q_i} = \frac{Q_{i-1}}{Q_{i-1}-P_{i-1}x}$となり、行列表示すると
+
+$$
+  \left(
+    \begin{array}{cc}
+      0 & 1  \\
+     -x & 1 
+    \end{array}
+  \right)
+  \left(
+    \begin{array}{cc}
+      P_{i-1}  \\
+      Q_{i-1}  
+    \end{array}
+  \right)
+  = \left(
+    \begin{array}{cc}
+      P_i   \\
+      Q_i
+    \end{array}
+  \right)
+$$
+より
+$$
+\left(
+    \begin{array}{cc}
+      P_i   \\
+      Q_i
+    \end{array}
+  \right)=
+  \left(
+    \begin{array}{cc}
+      0 & 1  \\
+     -x & 1 
+    \end{array}
+  \right)^{i}
+  \left(
+    \begin{array}{cc}
+      1   \\
+      1
+    \end{array}
+  \right)
+$$
+が従う。
+
+ここから特性方程式を立てて特性解を求めて愚直に計算しても解けるが(解法2を参照のこと)、式が非常に煩雑で計算・実装ともに厳しすぎる。
+
+そこで上の式の行列累乗を計算することを考える。愚直に計算すると定数倍が重いので、実装の工夫として$P,Q$をNTTした$\mathcal{F}(P),\mathcal{F}(Q)$を求める。$\mathcal{F}(P),\mathcal{F}(Q)$の$n$次の係数は$P,Q$に$x=g^n$を代入したものなので($g$は原始根)、$\mathrm{O}(N)$回の行列累乗で$\mathcal{F}(P),\mathcal{F}(Q)$が求まる。あとは得られた数列をIDFTしたものが答えになる。(このテクニックは多項式補間を$\log$1個で行う手法として知られている。)
+
+計算量は全体で$\mathrm{O}(N \log N)$であり、FFTが$7$回で済む(乗算$\frac{7}{3}$回相当)ので$N=10^6$でも十分高速に動作する。
+
+##### 解法2 ラグランジュの反転公式
+
+$$\lambda = \frac{1+\sqrt{1-4x}}{2}$$
+
+と置くと特性方程式の解を$\lambda,1-\lambda$と表すことが出来る。
+$$
+  \left(
+    \begin{array}{cc}
+      0 & 1  \\
+     -x & 1 
+    \end{array}
+  \right)^{n}=
+  \left(
+    \begin{array}{cc}
+      1 & 1  \\
+     \lambda & 1-\lambda 
+    \end{array}
+  \right)^{-1}
+  \left(
+    \begin{array}{cc}
+      \lambda & 0  \\
+     0 & 1 - \lambda 
+    \end{array}
+  \right)^{n}
+  \left(
+    \begin{array}{cc}
+      1 & 1  \\
+     \lambda & 1-\lambda 
+    \end{array}
+  \right)
+$$
+を用いて
+$$
+\left(
+    \begin{array}{cc}
+      P_n   \\
+      Q_n
+    \end{array}
+  \right)= \frac{1}{1-2\lambda}
+   \left(
+    \begin{array}{c}
+      2(1-\lambda) \lambda^n -(1-\lambda)^n\\
+     (1-\lambda)^n - 2\lambda^{n+1}
+    \end{array}
+  \right)
+$$
+から
+$$
+F_k=\frac{(1-\lambda)^{k+1}-\lambda^{k+1}}{(1-\lambda)^{k+2}-\lambda^{k+2}}
+$$
+を得る。(fps-sqrtを利用すればこの式を$x$の式に変形して答えを求めることも出来るが、極めて定数倍が重い。)
+
+この式はラグランジュの反転公式を$H=F_n,\phi(\lambda)=\frac{1}{1-\lambda}$としたものとしてみることが出来る。よって
+
+$$[x^n]F_k(x) = \frac{1}{n}\lbrack\lambda^{n-1}\rbrack\left(\frac{(1-\lambda)^{k+1}-\lambda^{k+1}}{(1-\lambda)^{k+2}-\lambda^{k+2}}\right)' \left(\frac{1}{1-\lambda}\right)^n$$
+
+となり、右辺を変形すると
+
+$$Q(\lambda)=(-\lambda^{2 (k + 1)} + (k + 1) (2 \lambda - 1) ((1-\lambda) \lambda)^k + (1 - \lambda)^{2 (k + 1)})$$
+
+とおいて
+
+$$\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda^{k+2}/(1-\lambda)^{k+2})^2} \frac{1}{(1-\lambda)^{n+2k+4}}$$
+
+$$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\sum_{i=1}^{\infty}\left(\frac{\lambda}{1-\lambda}\right)^{i(k+2)}\right)$$
+
+となり、$\lambda$と$1-\lambda$の積からなる$\mathrm{O}(\frac{N}{k})$項の和で表せたので$\mathrm{O}(\frac{N}{k})$で計算することが出来る。
+
+#### yukicoder No.963 門松列列(2)
+
+> 長さ$N$の交代順列の個数を求めよ。
+
+長さ$N$の交代順列のうち不等号の順番が<><><><>...となるものの個数を$\mathrm{dp}_N$と置いてDP遷移を考える。
+(便宜上$\mathrm{dp}_0=\mathrm{dp}_1=1$とおく。)
+$n$を左から$i+1(0 \leq i < n)$個目に置いたときの全ての交代順列の個数は($n-1$個から左に置く$i$個を選ぶ)$\cdot$(左の$i$個が交代順列)$\cdot$(右の$n-i-1$個が交代順列)なので
+$$\ \binom{n-1}{i} \mathrm{dp}_i \mathrm{dp} _{n-i-1} \cdot \frac{1}{2}$$
+となる。
+(<><><><>...である順列と><><><><...である順列の個数が同じことを利用して立式している。また、最後に2で割るのは、長さ$N$の交代順列のうち半分は不等式の順番が><><><...だから。)
+よって次の漸化式が成り立つ。
+$$\mathrm{dp} _ n =\sum_{0\leq i\lt n}\left(\frac{1}{2}\binom{N-1}{i} \mathrm{dp} _ i \mathrm{dp} _ {n-i-1}\right),\mathrm{dp} _ 0 =\mathrm{dp} _ 1 = 1$$
+$\mathrm{dp}_i$のEGFを$F$とおくと
+$$[x^n]F(x) = \lbrack x^{n-1}\rbrack \frac{F^2}{2}(n>1),[x^0]F(x)=[x]F(x)=1$$
+になるので、
+$$F = \int\frac{F^2}{2} dx + 1 + \frac{x}{2}$$
+を得る。両辺を微分して微分方程式を解くと
+$$F = \frac{1 + \sin x}{\cos x}$$
+を得る。
+
+#### [yukicoder No.1145 Sums of Powers](https://yukicoder.me/problems/no/1145)
+
+> 数列$a_0,...a_{N-1}$が与えられる。
+> $n=0$から$n=M$に対して$\sum_i a_i^k \bmod 998244353$を計算せよ。
+> $N,M \leq 10^5, 0 \leq a_i \lt 998244353$
+
+どうやら様々な解法がある問題のようで、[Editorial](https://yukicoder.me/problems/no/1145/editorial)でいくつかの解法が紹介されている。さらに、LOJ#2409にも同じ問題があるらしく、検索するとEditorialに載っていない解法が出てくる。[(参考)](https://blog.trisolaris.top/%E3%80%8Cthupc2017%E3%80%8Dsum/#more) いずれの解法も計算量は$\mathrm{O}((M + N) \log^2 (M + N))$であるようだ。
+
+その上、どうやら僕のコンテスト中の解法も微妙に違うのでここに記しておく。(本質は中国ブログの解法と同じだが…)
+
+$F(x) = \sum_i (1-a_ix)^{-1}$が答えのOGFなので$F$の先頭$M+1$項を計算すればよい。ここで$G(x)=\prod_i (1-a_ix)$とおくと、
+
+$$\frac{xG'(x)}{G(x)} = \frac{x \left(\sum_j -a_j \prod_{i\neq j}(1-a_ix)\right)}{G(x)}$$
+
+$$= \sum_j \frac{-a_jx}{1-a_jx} = n - F(x)$$
+
+を得る。よって
+
+$$F(x) = n-\frac{xG'(x)}{G(x)}$$
+
+が答えとなる。
+
+##### 似て非なる問題 (自作)
+
+> 数列$a_0,...a_{N}$が与えられる。
+> $n=0$から$n=M-1$に対して$\sum_i a_i i^n \bmod 998244353$を$\mathrm{O}((N+M)\log(N+M))$で計算せよ。
+> $N,M \leq 10^6, 0 \leq a_i \lt 998244353$
+
+求める答えのEGFを$F(x)$とおく。また、多項式$G(x)$を
+
+$$G(x) = \sum_{i=0}^{N} a_i x^i$$
+
+とおく。ここで$x$に$e^x$を代入すると
+
+$$G(e^x) = \sum_{i=0}^{N}a_i e^{ix} = \sum_{i=0}^N \sum_{n=0}^\infty \frac{a_i i^n}{n!}x^n$$
+
+$$=\sum_{n=0}^\infty \frac{1}{n!}x^n \sum_{i=0}^N a_i i^n = F(x)$$
+
+という恒等式を得る。
+
+この式log1個でどうやって計算するんだ…(は？)(出来たと思うんだけど、忘れた…勘違いかも)
+
