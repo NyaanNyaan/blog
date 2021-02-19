@@ -194,8 +194,11 @@ $$P(x) = (\sum_i p_ix)^N, Q(x) = \frac{1}{1 - \sum_i x^{c_i}}$$
 #### UOJ0424 count
 
 > 長さが$N$であり、$1$以上$M$以下の整数から構成されて、かつ$1$から$M$までの全ての整数が数列内に登場する数列を良い数列と呼ぶ。
+>
 > 良い数列$a$に対して、$f_a(l,r)$を$a$の$l$番目から$r$番目の整数のうち最大値の添え字とする。(最大値が複数ある場合は最小の添え字を取る。)
+>
 > 二つの良い数列$a,b$に対して、任意の$1 \leq i \leq j \leq N$において$f_a(i,j) = f_b(i,j)$が成り立つ時、が$a$と$b$が同型であると言う。
+>
 > $N$と$M$が与えられるので、同型でない数列がいくつかあるかを数え上げて$998244353$で割った余りを求めよ。
 > $M \leq N \leq 10^6$
 
@@ -225,19 +228,19 @@ $$F_i(x) = \frac{P_i(x)}{Q_i(x)}$$
 $$
   \left(
     \begin{array}{cc}
-      0 & 1  \\
+      0 & 1 \newline \\
      -x & 1 
     \end{array}
   \right)
   \left(
     \begin{array}{cc}
-      P_{i-1}  \\
+      P_{i-1}  \newline \\
       Q_{i-1}  
     \end{array}
   \right)
   = \left(
     \begin{array}{cc}
-      P_i   \\
+      P_i  \newline \\
       Q_i
     \end{array}
   \right)
@@ -246,19 +249,19 @@ $$
 $$
 \left(
     \begin{array}{cc}
-      P_i   \\
+      P_i   \newline \\
       Q_i
     \end{array}
   \right)=
   \left(
     \begin{array}{cc}
-      0 & 1  \\
+      0 & 1  \newline \\ 
      -x & 1 
     \end{array}
   \right)^{i}
   \left(
     \begin{array}{cc}
-      1   \\
+      1   \newline \\
       1
     \end{array}
   \right)
@@ -279,25 +282,25 @@ $$\lambda = \frac{1+\sqrt{1-4x}}{2}$$
 $$
   \left(
     \begin{array}{cc}
-      0 & 1  \\
+      0 & 1  \newline \\
      -x & 1 
     \end{array}
   \right)^{n}=
   \left(
     \begin{array}{cc}
-      1 & 1  \\
+      1 & 1  \newline \\
      \lambda & 1-\lambda 
     \end{array}
   \right)^{-1}
   \left(
     \begin{array}{cc}
-      \lambda & 0  \\
+      \lambda & 0 \newline \\
      0 & 1 - \lambda 
     \end{array}
   \right)^{n}
   \left(
     \begin{array}{cc}
-      1 & 1  \\
+      1 & 1  \newline \\
      \lambda & 1-\lambda 
     \end{array}
   \right)
@@ -306,13 +309,13 @@ $$
 $$
 \left(
     \begin{array}{cc}
-      P_n   \\
+      P_n  \newline \\
       Q_n
     \end{array}
   \right)= \frac{1}{1-2\lambda}
    \left(
     \begin{array}{c}
-      2(1-\lambda) \lambda^n -(1-\lambda)^n\\
+      2(1-\lambda) \lambda^n -(1-\lambda)^n \newline \\
      (1-\lambda)^n - 2\lambda^{n+1}
     \end{array}
   \right)
@@ -346,7 +349,7 @@ $$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\su
 長さ$N$の交代順列のうち不等号の順番が<><><><>...となるものの個数を$\mathrm{dp}_N$と置いてDP遷移を考える。
 (便宜上$\mathrm{dp}_0=\mathrm{dp}_1=1$とおく。)
 $n$を左から$i+1(0 \leq i < n)$個目に置いたときの全ての交代順列の個数は($n-1$個から左に置く$i$個を選ぶ)$\cdot$(左の$i$個が交代順列)$\cdot$(右の$n-i-1$個が交代順列)なので
-$$\ \binom{n-1}{i} \mathrm{dp}_i \mathrm{dp} _{n-i-1} \cdot \frac{1}{2}$$
+$$\binom{n-1}{i} \mathrm{dp}_i \mathrm{dp} _ {n-i-1} \cdot \frac{1}{2}$$
 となる。
 (<><><><>...である順列と><><><><...である順列の個数が同じことを利用して立式している。また、最後に2で割るのは、長さ$N$の交代順列のうち半分は不等式の順番が><><><...だから。)
 よって次の漸化式が成り立つ。
