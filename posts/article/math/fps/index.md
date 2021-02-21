@@ -22,15 +22,18 @@ draft: false
     - [UOJ0424 count](#uoj0424-count)
       - [解法1 通常型母関数](#解法1-通常型母関数)
       - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
-    - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2)
+    - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2httpsyukicodermeproblemsno963)
     - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
-      - [似て非なる問題 (自作)](#似て非なる問題-自作)
+      - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
+      - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
 
 <!-- /code_chunk_output -->
 
 ## FPS/多項式ライブラリの解説まとめ
 
-自分のライブラリ解説へのリンク集。(解説を書いてないものはリンク無し) 部分分数分解とEulerian Number以外は実装がライブラリに存在する。
+自分のライブラリ解説へのリンク集。
+
+リンクが無いものは解説を書いていないものだが、部分分数分解とEulerian Number以外は実装がライブラリに存在する。
 
 - 基本演算
   - [四則演算/剰余/逆元/累乗/指数関数/対数関数](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)
@@ -46,7 +49,8 @@ draft: false
   - [常微分方程式](https://nyaannyaan.github.io/library/fps/differential-equation.hpp)
   - [$\frac{1}{f(x)} \mod g(x)$, 多項式GCD](https://nyaannyaan.github.io/library/fps/polynomial-gcd.hpp)
   - $f(x)^k \mod g(x)$
-  - $\prod_i f_i(x)$
+  - $\prod_i (x + a_i)$
+  - $\prod_i (1 - x^{a_i})$
   - [階乗 $\mod p$](https://nyaannyaan.github.io/library/modulo/factorial.hpp)
   - 有名数列(スターリング数/ベル数/ベールヌイ数/分割数/Eulerian number)
   - [$\sum_i a^if(i)$](https://nyaannyaan.github.io/library/fps/sum-of-exponential-times-poly.hpp)
@@ -342,7 +346,7 @@ $$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\su
 
 となり、$\lambda$と$1-\lambda$の積からなる$\mathrm{O}(\frac{N}{k})$項の和で表せたので$\mathrm{O}(\frac{N}{k})$で計算することが出来る。
 
-#### yukicoder No.963 門松列列(2)
+#### [yukicoder No.963 門松列列(2)](https://yukicoder.me/problems/no/963)
 
 > 長さ$N$の交代順列の個数を求めよ。
 
@@ -384,22 +388,56 @@ $$F(x) = n-\frac{xG'(x)}{G(x)}$$
 
 が答えとなる。
 
-##### 似て非なる問題 (自作)
+##### [CF 755G](https://codeforces.com/contest/755/problem/G)
 
-> 数列$a_0,...a_{N}$が与えられる。
-> $n=0$から$n=M-1$に対して$\sum_i a_i i^n \bmod 998244353$を$\mathrm{O}((N+M)\log(N+M))$で計算せよ。
-> $N,M \leq 10^6, 0 \leq a_i \lt 998244353$
+> $1$から$n$までの数字が書かれた$n$個のボールからm個のグループを作る。各グループは1個のボール、または連続する2個の数字が書かれたボールから構成される。
+> $n,k$が与えられる。$1\leq m\leq k$に対して条件を満たす組み合わせは何通りか？
+>
+> $n \leq 10^9, k \leq 2^{15}$
 
-求める答えのEGFを$F(x)$とおく。また、多項式$G(x)$を
+答えである$a_{n,m}$の母関数$f_n$は
 
-$$G(x) = \sum_{i=0}^{N} a_i x^i$$
+$$f_{n+2}=f_{n+1}(x+1)+f_nx$$
 
-とおく。ここで$x$に$e^x$を代入すると
+という関係式が成り立つ。この式は
 
-$$G(e^x) = \sum_{i=0}^{N}a_i e^{ix} = \sum_{i=0}^N \sum_{n=0}^\infty \frac{a_i i^n}{n!}x^n$$
+$$
+\left(
+  \begin{array}{c}
+  f_{n+2} \newline \\
+  f_{n+1}
+  \end{array}
+\right) =
+\left(
+  \begin{array}{cc}
+  x+1 & x \newline \\
+  1 & 0
+  \end{array}
+\right)
+\left(
+  \begin{array}{c}
+  f_{n+1} \newline \\
+  f_{n}
+  \end{array}
+\right)
+$$
 
-$$=\sum_{n=0}^\infty \frac{1}{n!}x^n \sum_{i=0}^N a_i i^n = F(x)$$
+と変形すれば行列累乗の問題に持ち込めるので$\mathrm{O}(k \log k \log n)$でこの問題を解ける。(行列累乗の際に適宜$\mod x^{k+1}$を取る必要があるのに注意すること。)
 
-という恒等式を得る。
+##### [CF 438E](https://codeforces.com/contest/438/problem/E)
 
-この式log1個でどうやって計算するんだ…(は？)(出来たと思うんだけど、忘れた…勘違いかも)
+> $n,m$と$c_1,\ldots,c_n$が与えられるので、$c$に含まれる数をノードに書き込んだ根付き二分木を作ることを考える。$1\leq s\leq m$について、ノードに書かれた数字の和が$s$であるような二分木の個数は？
+>
+> $n,m \leq 10^5$
+
+Editorialがfps-inv,fps-sqrtの解説としてしばしば引用されることで有名な問題。
+
+$i$番目の答えを$f_i$とおくと、漸化式として
+
+$$f_0 = 1, f_i = \sum_{r \in c}\sum_i f_i f_{s-i-r}$$
+
+を得る。$f_i$の母関数を$F(x)$とおき、$C(x) = \sum_i c_ix^i$とすると
+
+$$F(x) = C(x) F^2(x) + 1 \rightarrow F(x) = \frac{1-\sqrt{1-4C(x)}}{2C(x)}$$
+
+を得るのでfps-sqrt, fps-invを利用すればこの問題を解くことが出来る。(上の形だと$C(x) \equiv 0 \pmod x$になってしまうので、計算の際は分子の有理化などの処理が必要である。)

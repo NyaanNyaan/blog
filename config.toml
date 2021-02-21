@@ -8,6 +8,7 @@ theme = "ananke"
   body_classes = "avenir bg-near-white"
   post_content_classes = "code"
   custom_css = ["css/zumen.css"]
+  pygmentsCodeFences = true
 
 [taxonomies]
   tag = "tags"
