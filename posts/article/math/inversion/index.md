@@ -36,6 +36,7 @@ draft: false
     - [概要](#概要)
     - [例題](#例題-3)
       - [LOJ6358 前夕](#loj6358-前夕httpslojacp6358)
+      - [bzoj 3328](#bzoj-3328)
 
 <!-- /code_chunk_output -->
 
@@ -520,3 +521,29 @@ $$=\frac{1}{m}\sum_{0\leq i\leq k,0\leq j\lt m}(-1)^{k-i} (W_m^j)^i \binom{k}{i}
 $$=\sum_{0\leq j \lt m} (W_m^i - 1)^k$$
 
 と変形できるので高速に計算できる。
+
+##### [bzoj 3328]()
+
+> $n,k,p$が与えられる。
+> $$\left(\sum_{i=0}^{\lfloor\frac{n}{k}\rfloor}\binom{n}{ik}F_{ik}\right)\bmod p$$
+> を求めよ。ただし$p$は素数で、$F_i$は$F_0=F_1=1,F_{i+2}=F_{i+1}+F_{i}$を満たす数列である。
+>
+> $n\leq 10^{18},k\leq 20000,p\leq 10^9, p \bmod k = 1$
+
+$$\sum_{i=0}^n \binom{n}{i}F_i [k\vert i]$$
+
+を計算できればよい。$\mod p$上の$1$の$k$乗根$W_k$を利用して変換すると、
+
+$$\frac{1}{k} \sum_{j=0}^k \left(\sum_{i=0}^n \binom{n}{i} F_i (W^{j})^i\right)$$
+
+という形になるので、$\sum_i \binom{n}{i} F_i x^i$を高速に計算できれば良いとわかる。
+
+計算のために行列を利用する。行列$A$をフィボナッチ数列の遷移行列とすると、$F_n = (A^n)_{11}$になる。よって、$I$を単位行列とすると、
+
+$$f(x) = (Ax + I)^n = \sum_{i=0}^n \binom{n}{i}A^i x^i$$
+
+の$1$行$1$列目は$\sum_i \binom{n}{i} F_i x^i$と一致する。よって答えは
+
+$$\left(\frac{1}{k} \sum_{j=0}^k f(W_j)\right)_{11}$$
+
+である。
