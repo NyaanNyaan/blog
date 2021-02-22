@@ -18,7 +18,6 @@ draft: false
       - [ (Library Checker) Montmort Number](#library-checker-montmort-numberhttpsjudgeyosupojpproblemmontmort_number_mod)
       - [ (Library Checker) Polynomial Taylor Shift](#library-checker-polynomial-taylor-shifthttpsjudgeyosupojpproblempolynomial_taylor_shift)
       - [CF 923E](#cf-923ehttpscodeforcescomcontest923probleme)
-      - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
   - [スターリング数の反転公式(スターリング行列)](#スターリング数の反転公式スターリング行列)
     - [例題](#例題-1)
       - [ (TCO 2014 Wildcard) CountTables](#tco-2014-wildcard-counttableshttpscommunitytopcodercomstatcproblem_statementpm13444rd16189)
@@ -294,16 +293,6 @@ $$
 のように表せるので$\mathrm{O}(N(\log N+\log M))$で計算できる。
 
 ゴリゴリ式変形する解法もあるようだ。(読めていない) [参考](https://blog.trisolaris.top/cf923e/)
-
-##### [LOJ575 不等関係](https://loj.ac/p/575)
-
-> [EDPC T Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)の$N \leq 10^5$版。
-
-$\mathrm{dp}_{i,j}$:=左から順に$i$番目の数字まで決めた時、$i$番目の数が今までで$j$番目に大きい場合の数、とすると$\mathrm{O}(N^2)$で解ける。
-
-高速化のために見方を変えて、連続する$<$の列を1つの区間として見る。すると、求める列は昇順列からなる区間が並んだもので、連続する区間は前の区間の最後の数字が後ろの区間の最初の数字より大きくなければならない。
-
-TODO:続きを書く
 
 ### スターリング数の反転公式(スターリング行列)
 

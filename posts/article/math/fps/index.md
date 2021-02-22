@@ -26,6 +26,7 @@ draft: false
     - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
       - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
       - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
+      - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
 
 <!-- /code_chunk_output -->
 
@@ -441,3 +442,24 @@ $$f_0 = 1, f_i = \sum_{r \in c}\sum_i f_i f_{s-i-r}$$
 $$F(x) = C(x) F^2(x) + 1 \rightarrow F(x) = \frac{1-\sqrt{1-4C(x)}}{2C(x)}$$
 
 を得るのでfps-sqrt, fps-invを利用すればこの問題を解くことが出来る。(上の形だと$C(x) \equiv 0 \pmod x$になってしまうので、計算の際は分子の有理化などの処理が必要である。)
+
+##### [LOJ575 不等関係](https://loj.ac/p/575)
+
+> 整数$N$と`<`と`>`からなる長さ$N-1$の文字列$S$が与えられる。次の条件を満たす長さ$N$の順列$p_1,p_2,\ldots,p_n$は何通りあるか？
+> - $S_i$が`<`のときは$p_i\lt p_{i+1}$であり、$S_i$が`>`のときは$p_i\gt p_{i+1}$である。
+>
+> $N \leq 10^5, \mod 998244353$
+
+$\mathrm{dp}_{i,j}$:=左から順に$i$番目の数字まで決めた時、$i$番目の数が今までで$j$番目に大きい場合の数、とすると$\mathrm{O}(N^2)$で解ける。
+
+高速化のために見方を変えて、連続する`<`の列を1つの区間として見て、`>`に対する包除原理を行う。
+- 例えば$S=$`>><><`の時は、|`>>?>?`| - |`>>>>?`| - |`>>?>>`| + |`>>>>>`| $=\frac{6!}{3!2!1!}-\frac{6!}{5!1!}-\frac{6!}{3!3!} + \frac{6!}{6!} = 60-6-20+1=35$になる。
+
+便宜上$S_0=S_{N}=`<`$とおき、$S[0,i]$間の`>`の個数を$c_i$とおくと
+
+$$f_0 = 1, f_i = [S_i=`\lt`]\sum_{j=0}^{i-1}f_j(-1)^{c_{i-1}-c_j} \frac{1}{(i-j)!}$$
+
+という漸化式が立ち、答えは$N!f_N$である。この式は分割統治FFT(オンラインFFT)で$\mathrm{O}(N \log^2 N)$で計算できる。
+
+AtCoderに$N\lt 3000$のジャッジがあるので中国OJのアカウントがなくてもAC確認が出来る。
+- [EDPC T Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)　[提出](https://atcoder.jp/contests/dp/submissions/20426492)

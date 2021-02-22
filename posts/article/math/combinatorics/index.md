@@ -34,10 +34,18 @@ draft: false
       - [LOJ2542 随機游走(ランダムウォーク)](#loj2542-随機游走ランダムウォークhttpslojacp2542)
       - [luogu4707　重返現世 (解法その2)](#luogu4707-重返現世-解法その2httpswwwluogucomcnproblemp4707)
 - [連続量をテーマにした問題](#連続量をテーマにした問題)
+  - [基本](#基本)
+    - [確率密度関数(PDF)と累積分布関数(CDF)](#確率密度関数pdfと累積分布関数cdf)
+    - [PDF,CDFと期待値](#pdfcdfと期待値)
   - [ベータ関数とベータ分布](#ベータ関数とベータ分布)
     - [例題](#例題-3)
-      - [$m$番目に大きい数 (典型)](#m番目に大きい数-典型)
+      - [(典型) $m$番目に大きい数](#典型-m番目に大きい数)
       - [CF 1153F](#cf-1153fhttpscodeforcescomcontest1153problemf)
+  - [問題集](#問題集)
+      - [ARC113F Social Distance](#arc113f-social-distancehttpsatcoderjpcontestsarc113tasksarc113_f)
+      - [yukicoder No.907 Continuous Kadomatsu](#yukicoder-no907-continuous-kadomatsuhttpsyukicodermeproblemsno907)
+      - [(AtCoder) HHKB2020 F Random Max](#atcoder-hhkb2020-f-random-maxhttpsatcoderjpcontestshhkb2020taskshhkb2020_f)
+      - [(典型) $n$個の区間の幅の最小値](#典型-n個の区間の幅の最小値)
 
 <!-- /code_chunk_output -->
 
@@ -213,11 +221,11 @@ $p_k$を$1-(k$回チョコを切っても終わらない確率)と置く。す�
 
 - $[0,L]$内から一様ランダムに取る$k$個の確率変数を昇順にソートしたものを$X_1,\ldots,X_k$と呼ぶ。また$X_0=0$と置く。この時、$X_{i+1} - X_i \leq K(0\leq i \lt k)$かつ$L - X_k \leq K$を$X$が満たす確率は$p_k$と一致する。
 
-$w = \frac{K}{L}$とおく。また、$Z_i = X_{i+1} - X_i$と置き換える。確率変数$Z_1,Z_2,\ldots,Z_n$の確率密度関数(PDF)は
+$w = \frac{K}{L}$とおく。また、$Z_i = \frac{X_{i+1} - X_i}{L}$と置き換える。この時、確率変数$Z_1,Z_2,\ldots,Z_n$の確率密度関数(PDF)は、$Z_1,Z_2,\ldots,Z_n$から得られる値の組$(z_1,z_2,\ldots,z_n)$に対して、$[0,1]$上の一様分布に従う確率変数$n$個の値$(z'_1,z'_2,\ldots,z'_n)$が$n!$通り対応することから、
 
-$$f(z_1,z_2,\ldots,z_n) = n! I_{0 \lt z_i \lt 1, \sum_{i} z \lt 1}$$
+$$f(z_1,z_2,\ldots,z_n) = n! \lbrack 0 \lt z_i \lt 1, \sum_{i} z_i \lt 1 \rbrack$$
 
-であるので、
+になるので、
 
 $$p_n = n! \int_{0 \lt z_i \lt w,1-w \lt \sum_i z_i \lt 1} dz = n! w^n \int_{0 \lt z_i \lt 1, \frac{1}{w} - 1 \lt \sum_i z_i \lt \frac{1}{w}} dz$$
 
@@ -410,6 +418,52 @@ $$=f(i-1,j,t)-f(i-1,j-a_i,t)+f(i-1,j-a_i,t-1)$$
 
 ## 連続量をテーマにした問題
 
+TODO: http://zory.ink/posts/3e6e の連続量の問題を埋める
+
+### 基本
+
+#### 確率密度関数(PDF)と累積分布関数(CDF)
+
+確率変数$X$の確率密度関数$f(x)$とは、確率変数がある値をとるという事象の確率密度を表す関数である。言い換えると、確率変数がある範囲の値を取る確率を$f(x)$の定積分により得られるように定義された関数であり、確率との間には次のような関係式が成り立つ。
+
+$$P(a\leq X \leq b) = \int_a^b f(x) dx$$
+
+$$\int_{-\infty}^\infty f(x)dx = 1$$
+
+次に、確率変数$X$の累積分布関数$F(x)$は「$X \leq x$である確率」の関数であり、次の式が従う。
+
+$$\mathrm{P}(X \leq x) = F(x)$$
+
+$$\mathrm{P}(a \lt X \leq b) = F(b) - F(a)$$
+
+また、「$X \geq x$である確率」を相補累積分布関数と呼び、$\overline{F}(x)$と表す。$F(x)$と$\overline{F}(x)$の間には
+
+$$F(x) + \overline{F}(x) = 1$$
+
+という関係がある。
+
+また、今までの定義から確率密度関数と累積分布関数の間には次の関係式が成り立つ。
+
+$$F(x) = \int_{-\infty}^x f(t)dt$$
+
+#### PDF,CDFと期待値
+
+確率変数$X$が$a \leq x \leq b$の範囲の値を取る時、$X$のPDF $f(x)$,CDF $F(x)$と$\mathrm{E}[X]$の関係式は次の式で与えられる。
+
+$$\mathrm{E}[X] = \int_{a}^b xf(x)dx$$
+
+$$\mathrm{E}[X] = a + \int_{a}^b (1 - F(x))dx$$
+
+2本目の式は
+
+$$\int_a^b(1-F(x))dx=\int_a^b \mathrm{P}(X\geq x)dx$$
+
+$$\int_a^b \left(\int_x^b f(t) dt\right) dx = \int_a^b \left(\int_a^t f(t)dx\right) dt$$
+
+$$\int_a^b \left(\int_a^t f(t)dx\right) dt = \int_a^b (t-a)f(t) dt = \mathrm{E}[X]-a$$
+
+と変形できる。(ここでは触れていないが、$F(x)$を微分して$x$を掛けて積分しても計算できる。)
+
 ### ベータ関数とベータ分布
 
 $$B(m,n) = \int_0^1 x^{m-1}(1−x)^{n-1} dx= \frac{(m-1)!(n-1)!}{(m+n-1)!}$$
@@ -418,14 +472,18 @@ $$f(x;m,n)=\frac{x^{m-1}(1-x)^{n-1}}{B(m,n)}$$
 
 #### 例題
 
-##### $m$番目に大きい数 (典型)
+##### (典型) $m$番目に大きい数
 
 > [0,1]上の一様分布に従う$n$個の確率変数$X_1,\ldots,X_n$のうち$m$番目に大きい数の期待値は？
 > $ m \leq n \leq 10^7$
 
-確率密度関数$f(x)$は
+答えが$x$以上である確率を表す関数$\overline{F}(x)$は
 
-$$f(x) = \binom{n}{m}m\cdot x^{n-m}(1-x)^{m-1} = \frac{x^{n-m}(1-x)^{m-1}}{B(n-m+1,m)}$$
+$$\overline{F}(x) = \sum_{i=m}^n \binom{n}{i} (1-x)^i x^{n-i}$$
+
+になる。よって確率密度関数$f(x)$は
+
+$$f(x) = (1-\overline{F}(x))' = \binom{n}{m}m\cdot x^{n-m}(1-x)^{m-1} = \frac{x^{n-m}(1-x)^{m-1}}{B(n-m+1,m)}$$
 
 で与えられる(ベータ分布)。よって期待値は
 
@@ -453,3 +511,92 @@ $$\sum_{k\leq j\leq n}\frac{n!p^j}{(n-j)!}\sum_{k\leq i\leq j}\frac{1}{i!}\frac{
 $$\int_0^1 p(x)^j = 2^j \int_0^1 x^j(1-x)^j dx = \frac{2^j (j!)^2}{(2j+1)!}$$
 
 となる。以上よりこの問題を$\mathrm{O}(N \log N)$で解くことが出来た。
+
+### 問題集
+
+##### [ARC113F Social Distance](https://atcoder.jp/contests/arc113/tasks/arc113_f)
+
+> 狭義単調増加な整数列$X_0=0,X_1,\ldots,X_N$が与えられる。人$i$が数直線の$\lbrack X_{i-1},X_i \rbrack$上を一様ランダムに立つ時、$\min_j(X_{j+1}-X_j)$の期待値は？
+>
+> $N \leq 20, X_N \leq 10^6$
+
+実装部分が一番重い問題だが、考察の時点で言い換えが出来ずに門前払いされてしまった…反省。
+
+最小値が$z$以上である確率の関数$F(z)$を計算できれば、答えは$\int_0^\infty F(z)dz$になるので問いに答えられる。$F(z)$を計算することを考える。
+
+$z$を固定して考える。確率変数$Y_i$を$\lbrack X_i,X_{i+1}\rbrack$上の一様分布に従う変数とすると、$F(z)$は$Y_{i+1} - Y_i \geq z$を満たす確率になる。そこで、$Y_i$を$\lbrack X_i - iz, X_{i+1} - iz\rbrack$内の一様分布上の変数として定義しなおすと、$F(z)$は$Y_0 \leq Y_1 \leq \ldots \leq Y_{n-1}$を満たす確率になる。
+
+  - このように「確率変数の大小を確定させる」ことでDPや積分などで計算可能な問題に持ち込めるというのが1つの大事な着眼点だと思う。
+
+この問題は次に説明するDPで解くことが出来る。まず、$Y_i$の両端である$2N$個の点を数直線上に並べて数直線を$2N+1$個の区間に分ける。そして、次のようなDPを考える。
+
+- $dp_{i,j,k} :=$ $Y_i$まで決めた時、$Y_i$が$j$番目の区間の中で$k$個目に小さい値である確率
+
+このようにDPを置いて、$i$の昇順にDPを埋めていく。$Y_i$が$j$番目の区間に入る確率を$p_{i,j}$と置くと、$dp_{i-1,\ast,\ast}$から$dp_{i,j,k}$への寄与は次のようになる。
+
+$$dp_{i,j,k} \leftarrow 
+\begin{cases}
+  dp_{i-1,j,k-1} \cdot p_{i,j} \cdot \frac{1}{k} & k \geq 2 \newline \\
+  dp_{i-1,j',\ast} \cdot p_{i,j} & j' \lt j, k = 1 
+\end{cases}
+$$
+
+1行目が本質で、区間$j$に$k$個の変数がある場合に順列になる確率が$\frac{1}{k!}$であることを反映した式になっている。このDPを計算することで$F(z)$を求めることが出来た。
+
+次に$z$を変数として扱う場合を考える。$z$を変数として考えると、$p_{i,j}$は$z$の1次式で与えられるので、DPの各要素は$z$の多項式になる。よって、DPの値を多項式として保持してDPを行えばよく、計算量は$\mathrm{O}(N^5)$になる。(計算の際に$k$に対して累積和を取れば$\mathrm{O}(N^4)$に高速化できる。)
+
+$Y_i$の両端である頂点の大小が入れ替わるのは$\mathrm{O}(N^2)$回なので、それぞれの場合に対してこの問題を解いて積分すれば$\mathrm{O}(N^7)$か$\mathrm{O}(N^6)$でこの問題を解くことが出来た。
+
+##### [yukicoder No.907 Continuous Kadomatsu](https://yukicoder.me/problems/no/907)
+
+上の問題と同様に、両端である$2N$個の点を数直線上に並べて数直線を$2N+1$個の区間に分ける。そして、次のようなDPを考える。
+
+- $dp_{i,j,k} :=$ $a_i$まで決めた時、$a_i$が$j$番目の区間にあり、$a_{i-k+1}$から$a_i$まで$k$連続で$j$番目の区間の中にある確率
+
+このDPは長さ$k$の順列が門松列になる確率を$kado_k$として
+
+$$dp_{i,j,k} \leftarrow 
+\begin{cases}
+  dp_{i-1,j,k-1} \cdot p_{i,j} \cdot \frac{kado_{k-1}}{kado_{k}} & k \geq 2 \newline \\
+  dp_{i-1,j',\ast} \cdot p_{i,j} & i \bmod 2 = 0, j' \lt j, k = 1  \newline \\
+  dp_{i-1,j',\ast} \cdot p_{i,j} & i \bmod 2 = 1, j' \gt j, k = 1 
+\end{cases}
+$$
+
+という遷移で表せるので、累積和と組み合わせてこの問題を$\mathrm{O}(N^3)$で解くことが出来た。
+
+##### [(AtCoder) HHKB2020 F Random Max](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_f)
+
+> 確率変数$X_1,X_2,\ldots,X_N$が与えられる。$X_i$は$[L_i,R_i]$の範囲を取る一様分布に従う。$\mathrm{E}[\max X_i]$を求めよ。
+>
+> $N \leq 1000, 0 \leq L_i \lt R_i \leq 10^9$
+
+区間同士の内外関係を一意に定めるために、上の問題と同様に$L,R$をソートすることで区間を$\mathrm{O}(N)$個に分割する。
+
+区間$\lbrack P, Q\rbrack$において$F(x):=($最大値が$x$以下であるような確率)を計算する。条件を満たす確率は変数ごとに独立なので、確率変数$X_i$が$x$以下である確率を$p_i$として$F(x) = \prod_i p_i$の形で表せる。$p_i$は場合分けをすると以下の式で表せる。(初めに区間を分けたおかげで区間が交差しているときは必ず$L_i \leq P$になる事実を利用している。)
+
+$$p_i = 
+\begin{cases}
+1 & R_i < P \newline \\
+0 & Q < L_i \newline \\
+\frac{x - L_i}{R_i - L_i} & \mathrm{otherwise}
+\end{cases}
+$$
+
+よって$F(x)$を$p_i$として計算すれば、区間$[P,Q]$の解答への寄与は$\int_P^Q xF'(x)dx$になる。これを全ての区間に対して計算すれば$\mathrm{O}(N^2\log^2 N)$でこの問題を解くことが出来た。($F(x)$を求める時に一つ前の$F(x)$から変化させて計算する方法を取れば$\mathrm{O}(N^2)$で計算できる。)
+
+##### (典型) $n$個の区間の幅の最小値
+
+> 区間$[0,1]$上に一様ランダムに区切り線を$n-1$本入れて$n$個の区間に分けた時、区間の幅の最小値の期待値は？
+
+最小値が$x$以上である確率$\overline{F}(x)$は、
+$[0,1]$上の一様分布の確率変数$X_1,X_2,\ldots,X_{n-1}$と$X_0 = 0, X_n = 1$に対して$X_{i+1} - X_i \geq x$を満たす確率に$(n-1)!$を掛けたものに等しい。
+
+ここで$Y_i = X_i - ix$とおくと、$Y_0 = 0 \leq Y_1 \leq Y_2 \leq \ldots \leq X_n = 1 - nx$を満たす確率を求めればよく、これは明らかに$\max(1-nx,0)^{n-1}$である。
+
+よって答えは
+
+$$\int_{0}^{\frac{1}{n}}(1-nx)^{n-1}dx = \frac{1}{n^2}$$
+
+である。
+
