@@ -27,6 +27,7 @@ draft: false
       - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
       - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
       - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
+      - [$\deg(f)$が小さいときの$f(x)^k \mod x^n$](#degfが小さいときのfxk-mod-xn)
 
 <!-- /code_chunk_output -->
 
@@ -455,11 +456,56 @@ $\mathrm{dp}_{i,j}$:=左から順に$i$番目の数字まで決めた時、$i$�
 高速化のために見方を変えて、連続する`<`の列を1つの区間として見て、`>`に対する包除原理を行う。
 - 例えば$S=$`>><><`の時は、|`>>?>?`| - |`>>>>?`| - |`>>?>>`| + |`>>>>>`| $=\frac{6!}{3!2!1!}-\frac{6!}{5!1!}-\frac{6!}{3!3!} + \frac{6!}{6!} = 60-6-20+1=35$になる。
 
-便宜上$S_0=S_{N}=`<`$とおき、$S[0,i]$間の`>`の個数を$c_i$とおくと
+便宜上$S_0=S_{N}=$`<`とおき、$S[0,i]$間の`<`の個数を$c_i$とおくと
 
-$$f_0 = 1, f_i = [S_i=`\lt`]\sum_{j=0}^{i-1}f_j(-1)^{c_{i-1}-c_j} \frac{1}{(i-j)!}$$
+$$f_0 = 1, f_i = [(S_i\ \ \mathrm{is}\ \lt)]\sum_{j=0}^{i-1}f_j(-1)^{c_{i-1}-c_j} \frac{1}{(i-j)!}$$
 
 という漸化式が立ち、答えは$N!f_N$である。この式は分割統治FFT(オンラインFFT)で$\mathrm{O}(N \log^2 N)$で計算できる。
 
 AtCoderに$N\lt 3000$のジャッジがあるので中国OJのアカウントがなくてもAC確認が出来る。
 - [EDPC T Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)　[提出](https://atcoder.jp/contests/dp/submissions/20426492)
+
+##### $\deg(f)$が小さいときの$f(x)^k \mod x^n$
+
+> $\deg(f)$が定数と見なせるとき、
+>  1. $f(x)^k \mod x^n$を$\mathrm{O}(n)$で求めよ。
+>  2. $[x^n] f(x)^k$を$\mathrm{O}(\log n)$で求めよ。
+
+$g(x) := f(x)^k$とおく。両辺を微分して$f$を掛けると次式を得る。
+
+$$fg' = k f' g$$
+
+両辺の係数を比較すると、$a$次の係数は
+
+$$\sum_{i=0}^{a}(a-i+1) f_i g_{a-i+1} = k \sum_{i=0}^a (i+1)f_{i+1} g_{a-i}$$
+
+になる。ここで$d := \deg(f)$とおくと、$d < i$のとき$f_i=0$なので、
+
+$$\sum_{i=0}^{d}(a-i+1)f_i g_{a-i+1} = k \sum_{i=0}^{d-1} (i+1)f_{i+1}g_{a-i}$$
+
+になり、上式を整理すると以下の漸化式を得る。
+
+$$g_{a+1} = \frac{\sum_{i=1}^{d} f_{i}g_{a-i+1}((k+1)i-(a+1))}{f_0(a+1)}$$
+
+この式に初項$g_0 = f_0^k$を代入して漸化式を前から計算していけばよく、逆元の前計算を利用すれば$g_0,g_1,\ldots, g_n$を高速に列挙出来る。
+
+さらに、上式は数列$(g_i)$が多項式係数を持つ線形漸化式で表せることを意味している。よって$g_n$はmin25氏のアルゴリズムで高速に復元できる…はず(未実装)。
+
+```cpp
+fps fast_pow(const fps &f, long long k, int n) {
+  if (f.size() == 0 or n == 0) return fps(n, mint(0));
+  int d = f.size() - 1;
+  fps g(n);
+  g[0] = f[0].pow(k);
+  mint denom = f[0].inverse();
+  k %= mint::get_mod();
+  for (int a = 0; a < n - 1; a++) {
+    int ie = min(a + 1, d);
+    for (int i = 1; i <= ie; i++) {
+      g[a + 1] += f[i] * g[a - i + 1] * ((k + 1) * i - (a + 1));
+    }
+    g[a + 1] *= denom * C.inv(a + 1);
+  }
+  return g;
+}
+```
