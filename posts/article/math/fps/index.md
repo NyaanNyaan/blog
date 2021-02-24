@@ -18,16 +18,16 @@ draft: false
       - [例1 カタラン数](#例1-カタラン数)
       - [例2 N頂点の根付き木の数え上げ(ケイリーの公式)](#例2-n頂点の根付き木の数え上げケイリーの公式)
 - [問題集](#問題集)
-      - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
-      - [UOJ0424 count](#uoj0424-count)
-        - [解法1 通常型母関数](#解法1-通常型母関数)
-        - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
-      - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2httpsyukicodermeproblemsno963)
-      - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
-      - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
-      - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
-      - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
-      - [$\deg(f)$が小さいときの$f(x)^k \mod x^n$](#degfが小さいときのfxk-mod-xn)
+    - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
+    - [UOJ0424 count](#uoj0424-counthttpsuojacproblem424localeen)
+      - [解法1 通常型母関数](#解法1-通常型母関数)
+      - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
+    - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2httpsyukicodermeproblemsno963)
+    - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
+    - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
+    - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
+    - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
+    - [$\deg(f)$が小さいときの$f(x)^k \mod x^n$](#degfが小さいときのfxk-mod-xn)
 
 <!-- /code_chunk_output -->
 
@@ -177,7 +177,7 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 
 - 形式的冪級数の式変形の部分にポイントが置かれている印象の問題をここにまとめる。
 
-##### [CF 865G](https://codeforces.com/problemset/problem/865/G)
+#### [CF 865G](https://codeforces.com/problemset/problem/865/G)
 
 > $n$種類の花びらと$m$種類のお菓子箱があり、$i$番目の花には$p_i$枚の花弁が、$j$番目の箱には$c_i$枚のチョコレートが入っている。
 > $N$本の花とチョコレートをそれぞれ一列に並べる。この時、花びらの枚数とチョコレートの枚数が一致するようにする。条件を満たす並べ方は何通り？$\pmod{10^9+7}$
@@ -199,7 +199,7 @@ $$P(x) = (\sum_i x^{p_i})^N, Q(x) = 1 - \sum_i x^{c_i}$$
 > 
 > と変形出来て、上式はFiduccia's algorithmで計算できる。
 
-##### UOJ0424 count
+#### [UOJ0424 count](https://uoj.ac/problem/424?locale=en)
 
 > 長さが$N$であり、$1$以上$M$以下の整数から構成されて、かつ$1$から$M$までの全ての整数が数列内に登場する数列を良い数列と呼ぶ。
 >
@@ -227,7 +227,7 @@ $$F_1 = \frac{1}{1-x},  F_i = \frac{1}{1-F_{i-1}x}$$
 
 という漸化式を得る。
 
-###### 解法1 通常型母関数
+##### 解法1 通常型母関数
 
 $$F_i(x) = \frac{P_i(x)}{Q_i(x)}$$
 
@@ -282,7 +282,7 @@ $$
 
 計算量は全体で$\mathrm{O}(N \log N)$であり、FFTが$7$回で済む(乗算$\frac{7}{3}$回相当)ので$N=10^6$でも十分高速に動作する。
 
-###### 解法2 ラグランジュの反転公式
+##### 解法2 ラグランジュの反転公式
 
 $$\lambda = \frac{1+\sqrt{1-4x}}{2}$$
 
@@ -350,7 +350,7 @@ $$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\su
 
 となり、$\lambda$と$1-\lambda$の積からなる$\mathrm{O}(\frac{N}{k})$項の和で表せたので$\mathrm{O}(\frac{N}{k})$で計算することが出来る。
 
-##### [yukicoder No.963 門松列列(2)](https://yukicoder.me/problems/no/963)
+#### [yukicoder No.963 門松列列(2)](https://yukicoder.me/problems/no/963)
 
 > 長さ$N$の交代順列の個数を求めよ。
 
@@ -369,7 +369,7 @@ $$F = 1 + \int\frac{F^2}{2} dx $$
 $$F = \frac{1 + \sin x}{\cos x}$$
 を得る。
 
-##### [yukicoder No.1145 Sums of Powers](https://yukicoder.me/problems/no/1145)
+#### [yukicoder No.1145 Sums of Powers](https://yukicoder.me/problems/no/1145)
 
 > 数列$a_0,...a_{N-1}$が与えられる。
 > $n=0$から$n=M$に対して$\sum_i a_i^k \bmod 998244353$を計算せよ。
@@ -391,7 +391,7 @@ $$F(x) = n-\frac{xG'(x)}{G(x)}$$
 
 が答えとなる。
 
-##### [CF 755G](https://codeforces.com/contest/755/problem/G)
+#### [CF 755G](https://codeforces.com/contest/755/problem/G)
 
 > $1$から$n$までの数字が書かれた$n$個のボールからm個のグループを作る。各グループは1個のボール、または連続する2個の数字が書かれたボールから構成される。
 > $n,k$が与えられる。$1\leq m\leq k$に対して条件を満たす組み合わせは何通りか？
@@ -427,7 +427,7 @@ $$
 
 と変形すれば行列累乗の問題に持ち込めるので$\mathrm{O}(k \log k \log n)$でこの問題を解ける。(行列累乗の際に適宜$\mod x^{k+1}$を取る必要があるのに注意すること。)
 
-##### [CF 438E](https://codeforces.com/contest/438/problem/E)
+#### [CF 438E](https://codeforces.com/contest/438/problem/E)
 
 > $n,m$と$c_1,\ldots,c_n$が与えられるので、$c$に含まれる数をノードに書き込んだ根付き二分木を作ることを考える。$1\leq s\leq m$について、ノードに書かれた数字の和が$s$であるような二分木の個数は？
 >
@@ -445,7 +445,7 @@ $$F(x) = C(x) F^2(x) + 1 \rightarrow F(x) = \frac{1-\sqrt{1-4C(x)}}{2C(x)}$$
 
 を得るのでfps-sqrt, fps-invを利用すればこの問題を解くことが出来る。(上の形だと$C(x) \equiv 0 \pmod x$になってしまうので、計算の際は分子の有理化などの処理が必要である。)
 
-##### [LOJ575 不等関係](https://loj.ac/p/575)
+#### [LOJ575 不等関係](https://loj.ac/p/575)
 
 > 整数$N$と`<`と`>`からなる長さ$N-1$の文字列$S$が与えられる。次の条件を満たす長さ$N$の順列$p_1,p_2,\ldots,p_n$は何通りあるか？
 > - $S_i$が`<`のときは$p_i\lt p_{i+1}$であり、$S_i$が`>`のときは$p_i\gt p_{i+1}$である。
@@ -466,7 +466,7 @@ $$f_0 = 1, f_i = [(S_i\ \ \mathrm{is}\ \lt)]\sum_{j=0}^{i-1}f_j(-1)^{c_{i-1}-c_j
 AtCoderに$N\lt 3000$のジャッジがあるので中国OJのアカウントがなくてもAC確認が出来る。
 - [EDPC T Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)　[提出](https://atcoder.jp/contests/dp/submissions/20426492)
 
-##### $\deg(f)$が小さいときの$f(x)^k \mod x^n$
+#### $\deg(f)$が小さいときの$f(x)^k \mod x^n$
 
 > $\deg(f)$が定数と見なせるとき、
 >  1. $f(x)^k \mod x^n$を$\mathrm{O}(n)$で求めよ。
