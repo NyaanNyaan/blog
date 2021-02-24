@@ -18,12 +18,12 @@ draft: false
       - [例1 カタラン数](#例1-カタラン数)
       - [例2 N頂点の根付き木の数え上げ(ケイリーの公式)](#例2-n頂点の根付き木の数え上げケイリーの公式)
 - [問題集](#問題集)
-    - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
-    - [UOJ0424 count](#uoj0424-count)
-      - [解法1 通常型母関数](#解法1-通常型母関数)
-      - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
-    - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2httpsyukicodermeproblemsno963)
-    - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
+      - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
+      - [UOJ0424 count](#uoj0424-count)
+        - [解法1 通常型母関数](#解法1-通常型母関数)
+        - [解法2 ラグランジュの反転公式](#解法2-ラグランジュの反転公式)
+      - [yukicoder No.963 門松列列(2)](#yukicoder-no963-門松列列2httpsyukicodermeproblemsno963)
+      - [yukicoder No.1145 Sums of Powers](#yukicoder-no1145-sums-of-powershttpsyukicodermeproblemsno1145)
       - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
       - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
       - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
@@ -177,27 +177,29 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 
 - 形式的冪級数の式変形の部分にポイントが置かれている印象の問題をここにまとめる。
 
-#### [CF 865G](https://codeforces.com/problemset/problem/865/G)
+##### [CF 865G](https://codeforces.com/problemset/problem/865/G)
 
 > $n$種類の花びらと$m$種類のお菓子箱があり、$i$番目の花には$p_i$枚の花弁が、$j$番目の箱には$c_i$枚のチョコレートが入っている。
 > $N$本の花とチョコレートをそれぞれ一列に並べる。この時、花びらの枚数とチョコレートの枚数が一致するようにする。条件を満たす並べ方は何通り？$\pmod{10^9+7}$
 > 
 > $n\leq 10,m\leq 100,p_i \leq 10^9,N \leq 10^{18}, c_i \leq 250$
 
-$$P(x) = (\sum_i p_ix)^N, Q(x) = \frac{1}{1 - \sum_i x^{c_i}}$$
+$$P(x) = (\sum_i x^{p_i})^N, Q(x) = 1 - \sum_i x^{c_i}$$
 
-とおくと、答えは$\sum_i [x^i]P(x)^N \cdot [x^i]Q(x)$になる。
+とおくと、答えは$\sum_i [x^i]P(x)^N \cdot [x^i]\frac{1}{Q(x)}$になる。
 
-ここで$k = \max(c)$とおくと、Fiduccia's algorithmより$[x^i]Q(x)$は$x^i \mod \mathrm{rev}(Q)$の係数と$[x^i]Q(x),i \lt k$の内積で表されるとわかるので、$P(x)^N \mod \mathrm{rev}(Q)$を計算すれば容易に答えが求まる。
+ここで$k = \max(c)$とおくと、Fiduccia's algorithmより$[x^i]\frac{1}{Q(x)}$は$x^i \mod \mathrm{rev}(Q)$の係数と$[x^i]\frac{1}{Q(x)},i \lt k$の内積で表されるとわかるので、$P(x)^N \mod \mathrm{rev}(Q)$を計算すれば容易に答えが求まる。
 
-- 初めは以下のように解いたが答えが合わない、どこか間違えているらしい…
+- 初めは以下のように解いたが答えが合わない、どこか間違えているらしい…たぶんテイラー級数とローラン級数を雑に掛けているのが問題？ TODO: Editorialを読む
 > (P,Qの定義までは同じ。)これを計算できる形に変えるために$Q$に$x\leftarrow \frac{1}{x}$を代入すると
-> $$\sum_i [x^i]P(x)^N \cdot \lbrack x^{-i}\rbrack Q(x^{-1}) = [x^0] P(x)^N Q(x^{-1}) = \frac{P(x)}{1 - \sum_i x^{-c_i}}$$
+> $$\sum_i [x^i]P(x)^N \cdot \lbrack x^{-i}\rbrack \frac{1}{Q(x^{-1})} = [x^0]\frac{P(x)^N}{Q(x^{-1})} $$
+> 
 > $k = \max(c)$とおくと
-> $$= [x^k] \frac{P(x)^N}{x^k - \sum_i x^{k-c_i}}$$
+> $$= [x^0] \frac{x^k P(x)^N}{\mathrm{rev}(Q)}$$
+> 
 > と変形出来て、上式はFiduccia's algorithmで計算できる。
 
-#### UOJ0424 count
+##### UOJ0424 count
 
 > 長さが$N$であり、$1$以上$M$以下の整数から構成されて、かつ$1$から$M$までの全ての整数が数列内に登場する数列を良い数列と呼ぶ。
 >
@@ -225,7 +227,7 @@ $$F_1 = \frac{1}{1-x},  F_i = \frac{1}{1-F_{i-1}x}$$
 
 という漸化式を得る。
 
-##### 解法1 通常型母関数
+###### 解法1 通常型母関数
 
 $$F_i(x) = \frac{P_i(x)}{Q_i(x)}$$
 
@@ -280,7 +282,7 @@ $$
 
 計算量は全体で$\mathrm{O}(N \log N)$であり、FFTが$7$回で済む(乗算$\frac{7}{3}$回相当)ので$N=10^6$でも十分高速に動作する。
 
-##### 解法2 ラグランジュの反転公式
+###### 解法2 ラグランジュの反転公式
 
 $$\lambda = \frac{1+\sqrt{1-4x}}{2}$$
 
@@ -348,27 +350,26 @@ $$=\lbrack\lambda^{n-1}\rbrack\frac{Q(\lambda)}{(1-\lambda)^{n+2k+4}}\left(1+\su
 
 となり、$\lambda$と$1-\lambda$の積からなる$\mathrm{O}(\frac{N}{k})$項の和で表せたので$\mathrm{O}(\frac{N}{k})$で計算することが出来る。
 
-#### [yukicoder No.963 門松列列(2)](https://yukicoder.me/problems/no/963)
+##### [yukicoder No.963 門松列列(2)](https://yukicoder.me/problems/no/963)
 
 > 長さ$N$の交代順列の個数を求めよ。
 
-長さ$N$の交代順列のうち不等号の順番が<><><><>...となるものの個数を$\mathrm{dp} _ N$と置いてDP遷移を考える。
-(便宜上$\mathrm{dp} _ 0 = \mathrm{dp} _ 1 = 1$とおく。)
+長さ$N$の交代順列のうち不等号の順番が<><><><>...となるものの個数を$dp _ N$と置いてDP遷移を考える。(便宜上$dp _ 0 = 1$とおく。)
 $n$を左から$i+1(0 \leq i < n)$個目に置いたときの全ての交代順列の個数は($n-1$個から左に置く$i$個を選ぶ)$\cdot$(左の$i$個が交代順列)$\cdot$(右の$n-i-1$個が交代順列)なので
-$$\binom{n-1}{i} \mathrm{dp} _ i \mathrm{dp} _ {n-i-1} \cdot \frac{1}{2}$$
+$$\binom{n-1}{i} dp _ i dp _ {n-i-1} \cdot \frac{1}{2}$$
 となる。
 (<><><><>...である順列と><><><><...である順列の個数が同じことを利用して立式している。また、最後に2で割るのは、長さ$N$の交代順列のうち半分は不等式の順番が><><><...だから。)
 よって次の漸化式が成り立つ。
-$$\mathrm{dp} _ n =\sum_{0\leq i\lt n}\left(\frac{1}{2}\binom{N-1}{i} \mathrm{dp} _ i \mathrm{dp} _ {n-i-1}\right),\mathrm{dp} _ 0 =\mathrm{dp} _ 1 = 1$$
-$\mathrm{dp}_i$のEGFを$F$とおくと
-$$[x^n]F(x) = \lbrack x^{n-1}\rbrack \frac{F^2}{2}(n>1),[x^0]F(x)=[x]F(x)=1$$
+$$dp _ n =\sum_{0\leq i\lt n}\left(\frac{1}{2}\binom{N-1}{i} dp _ i dp _ {n-i-1}\right),dp _ 0 = 1$$
+$dp_i$のEGFを$F$とおくと
+$$[x^n]F(x) = \lbrack x^{n-1}\rbrack \frac{F^2}{2}(n>1),[x^0]F(x)=1$$
 になるので、
-$$F = \int\frac{F^2}{2} dx + 1 + \frac{x}{2}$$
+$$F = 1 + \int\frac{F^2}{2} dx $$
 を得る。両辺を微分して微分方程式を解くと
 $$F = \frac{1 + \sin x}{\cos x}$$
 を得る。
 
-#### [yukicoder No.1145 Sums of Powers](https://yukicoder.me/problems/no/1145)
+##### [yukicoder No.1145 Sums of Powers](https://yukicoder.me/problems/no/1145)
 
 > 数列$a_0,...a_{N-1}$が与えられる。
 > $n=0$から$n=M$に対して$\sum_i a_i^k \bmod 998244353$を計算せよ。
@@ -451,7 +452,7 @@ $$F(x) = C(x) F^2(x) + 1 \rightarrow F(x) = \frac{1-\sqrt{1-4C(x)}}{2C(x)}$$
 >
 > $N \leq 10^5, \mod 998244353$
 
-$\mathrm{dp}_{i,j}$:=左から順に$i$番目の数字まで決めた時、$i$番目の数が今までで$j$番目に大きい場合の数、とすると$\mathrm{O}(N^2)$で解ける。
+$dp_{i,j}$:=左から順に$i$番目の数字まで決めた時、$i$番目の数が今までで$j$番目に大きい場合の数、とすると$\mathrm{O}(N^2)$で解ける。
 
 高速化のために見方を変えて、連続する`<`の列を1つの区間として見て、`>`に対する包除原理を行う。
 - 例えば$S=$`>><><`の時は、|`>>?>?`| - |`>>>>?`| - |`>>?>>`| + |`>>>>>`| $=\frac{6!}{3!2!1!}-\frac{6!}{5!1!}-\frac{6!}{3!3!} + \frac{6!}{6!} = 60-6-20+1=35$になる。
@@ -469,7 +470,7 @@ AtCoderに$N\lt 3000$のジャッジがあるので中国OJのアカウントが
 
 > $\deg(f)$が定数と見なせるとき、
 >  1. $f(x)^k \mod x^n$を$\mathrm{O}(n)$で求めよ。
->  2. $[x^n] f(x)^k$を$\mathrm{O}(\log n)$で求めよ。
+>  2. $[x^n] f(x)^k$を$\mathrm{\tilde{O}}(\sqrt{n})$で求めよ。
 
 $g(x) := f(x)^k$とおく。両辺を微分して$f$を掛けると次式を得る。
 
@@ -483,28 +484,28 @@ $$\sum_{i=0}^{a}(a-i+1) f_i g_{a-i+1} = k \sum_{i=0}^a (i+1)f_{i+1} g_{a-i}$$
 
 $$\sum_{i=0}^{d}(a-i+1)f_i g_{a-i+1} = k \sum_{i=0}^{d-1} (i+1)f_{i+1}g_{a-i}$$
 
-になり、上式を整理すると以下の漸化式を得る。
+になり、上式を整理すると$a\geq 0$に対して以下の漸化式を得る。
 
-$$g_{a+1} = \frac{\sum_{i=1}^{d} f_{i}g_{a-i+1}((k+1)i-(a+1))}{f_0(a+1)}$$
+$$g_{a} = \frac{\sum_{i=1}^{d} f_{i}((k+1)i-a)g_{a-i}}{af_0}$$
 
 この式に初項$g_0 = f_0^k$を代入して漸化式を前から計算していけばよく、逆元の前計算を利用すれば$g_0,g_1,\ldots, g_n$を高速に列挙出来る。
 
-さらに、上式は数列$(g_i)$が多項式係数を持つ線形漸化式で表せることを意味している。よって$g_n$はmin25氏のアルゴリズムで高速に復元できる…はず(未実装)。
+さらに、上式は数列$(g_i)$が多項式係数を持つ線形漸化式で表せることを意味している。よって$g_n$はmin25氏によるp-recursiveを復元するアルゴリズムで高速に復元できる…はず(未実装)。
 
 ```cpp
-fps fast_pow(const fps &f, long long k, int n) {
-  if (f.size() == 0 or n == 0) return fps(n, mint(0));
+vm fast_pow(const vm &f, long long k, int n) {
+  if (f.size() == 0 or n == 0) return vm(n, mint(0));
   int d = f.size() - 1;
-  fps g(n);
+  vm g(n);
   g[0] = f[0].pow(k);
   mint denom = f[0].inverse();
   k %= mint::get_mod();
-  for (int a = 0; a < n - 1; a++) {
-    int ie = min(a + 1, d);
+  for (int a = 1; a < n; a++) {
+    int ie = min(a, d);
     for (int i = 1; i <= ie; i++) {
-      g[a + 1] += f[i] * g[a - i + 1] * ((k + 1) * i - (a + 1));
+      g[a] += f[i] * g[a - i] * ((k + 1) * i - a);
     }
-    g[a + 1] *= denom * C.inv(a + 1);
+    g[a] *= denom * C.inv(a);
   }
   return g;
 }
