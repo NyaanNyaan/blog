@@ -28,6 +28,7 @@ draft: false
     - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
     - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
     - [$\deg(f)$が小さいときの$f(x)^k \mod x^n$](#degfが小さいときのfxk-mod-xn)
+    - [CF 773F](#cf-773fhttpscodeforcescomproblemsetproblem773f)
 
 <!-- /code_chunk_output -->
 
@@ -35,7 +36,7 @@ draft: false
 
 自分のライブラリ解説へのリンク集。
 
-リンクが無いものは解説を書いていないものだが、部分分数分解とEulerian Number以外は実装がライブラリに存在する。
+リンクが無いものは解説を書いていないものだが、大半は実装がライブラリに存在する。
 
 - 基本演算
   - [四則演算/剰余/逆元/累乗/指数関数/対数関数](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)
@@ -45,9 +46,11 @@ draft: false
   - [三角関数](https://nyaannyaan.github.io/library/fps/fps-circular.hpp)
 - 応用
   - 多点評価(multipoint evaluation)
-  - 多点補間(multipoint interpolation)
+  - 多項式補間
   - [線形漸化式の第$k$項を求める](https://nyaannyaan.github.io/library/fps/kitamasa.hpp)
   - 線形漸化式を求める(berlekamp-massey)
+  - p-recursiveの第$k$項を求める
+  - p-recursiveを求める
   - [常微分方程式](https://nyaannyaan.github.io/library/fps/differential-equation.hpp)
   - [$\frac{1}{f(x)} \mod g(x)$, 多項式GCD](https://nyaannyaan.github.io/library/fps/polynomial-gcd.hpp)
   - $f(x)^k \mod g(x)$
@@ -57,7 +60,10 @@ draft: false
   - 有名数列(スターリング数/ベル数/ベールヌイ数/分割数/Eulerian number)
   - [$\sum_i a^if(i)$](https://nyaannyaan.github.io/library/fps/sum-of-exponential-times-poly.hpp)
   - 部分分数分解
+  - 分割統治FFT(オンラインFFT)
   - 標本点のシフト
+  - 多次元FFT
+  - 多変数FPS(multivariate multiplication)
   - 多項式行列の行列式
   - Black Box Linear Algebra(ベクトル/行列の列の最小多項式)
 
@@ -510,3 +516,17 @@ vm fast_pow(const vm &f, long long k, int n) {
   return g;
 }
 ```
+
+#### [CF 773F](https://codeforces.com/problemset/problem/773/F)
+
+> 問題の本質部分：
+> $$\sum_{0 \leq i \lt m} \sum_{0 \leq j \leq n}\binom{2i}{2j}$$ を任意modで計算せよ。
+> $n \leq 30000, m \leq 10^9$
+
+式を母関数で表すと
+
+$$\sum_{i,j} \lbrack x^{2j} \rbrack (1+x)^{2i}$$
+
+と書いてあるのがわかるので$\sum_i (1+x)^{2i} \bmod{x^n}$を二分累乗法で計算すると$\mathrm{O}(n \log n \log m)$で解ける。
+
+(任意modじゃないと(=逆元ありだと)もっと高速に解けるのか？を少し考えたがわからなかった…)
