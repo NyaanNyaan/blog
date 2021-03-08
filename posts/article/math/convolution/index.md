@@ -1,7 +1,7 @@
 ---
 title: "Convolution"
 date: 2021-03-01T18:47:38+09:00
-draft: true
+draft: false
 ---
 
 ## 特殊なFFT
@@ -232,6 +232,14 @@ $$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{|T| + |U|}$$
 
 また、集合関数に対してinv,exp,log,sqrtなどを定義して計算することも出来る。計算方法は積の時と同様である。すなわち、$\phi(f)$を計算するには$f$をゼータ変換して、各点について多項式関数での$\phi(F)$を計算した後にメビウス変換で戻せばよい。
 
+#### 例題
+
+##### [Xmas2020 H](https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h)
+
+##### [ARC 105F](https://atcoder.jp/contests/arc105/tasks/arc105_f)
+
+TODO:解く
+
 ## 高次元FFT・FPS
 
 ### 高次元FFT・畳み込み
@@ -353,4 +361,3 @@ $$\mathfrak{D}(f) = \mathfrak{D}(\log g) = \frac{\mathfrak{D}(g)}{g} $$
 [提出](https://uoj.ac/submission/460059)　
 
 c++11用のNTT/Montgomery Modintライブラリを作成してなんとかAC...　信じがたいことにinvは巡回畳み込みを用いた$\mathrm{O}(\frac{5}{3}M(n))$のものでないと通らないようだ。さらに自分の場合は2d vectorの定数倍が悪いのかmodintをmontgomeryにしないと通らなかった。やべ～～～～
-

@@ -181,7 +181,7 @@ $$\sum_{n=0}^\infty (1-p_n) = \sum_{n=0}^\infty n![x^n]\left(e^x - P(x)\right)$$
 
 ##### [AGC038E Gachapon](https://atcoder.jp/contests/agc038/tasks/agc038_e)
 
-maroon神のeditorialが理解不能で涙が止まらない…
+maroon神のeditorialが理解不能で涙が止まらない… -> なんとか理解できるようになりました
 
 母関数で解く。小問題の母関数は
 
