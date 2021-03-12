@@ -4,6 +4,45 @@ date: 2021-03-01T18:47:38+09:00
 draft: false
 ---
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [特殊なFFT](#特殊なfft)
+  - [Rader's FFT algorithm](#raders-fft-algorithm)
+  - [Cooley-Tukey FFT algirithm](#cooley-tukey-fft-algirithm)
+  - [Chirp Z-transform(Bluestein's algorithm, CZT)](#chirp-z-transformbluesteins-algorithm-czt)
+  - [例題](#例題)
+    - [yukicoder No.931 Multiplicative Convolution](#yukicoder-no931-multiplicative-convolutionhttpsyukicodermeproblemsno931)
+    - [ABC137C Polynomial Construction](#abc137c-polynomial-constructionhttpsatcoderjpcontestsabc137tasksabc137_f)
+    - [CF 1054H  Epic Convolution](#cf-1054h-epic-convolutionhttpscodeforcescomcontest1054problemh)
+      - [解法1 高次元FFT(Editorial)](#解法1-高次元ffteditorial)
+      - [解法2 Multipoint Evaluation](#解法2-multipoint-evaluation)
+      - [解法3 Cooley-Tukey アルゴリズム & 解法4 Chirp Z変換](#解法3-cooley-tukey-アルゴリズム-解法4-chirp-z変換)
+    - [その他畳み込み関連問題](#その他畳み込み関連問題)
+      - [任意長FFT](#任意長fft)
+      - [長さpのFFT](#長さpのfft)
+- [特殊な畳み込み](#特殊な畳み込み)
+  - [Subset Convolution](#subset-convolution)
+    - [概要](#概要)
+    - [原理](#原理)
+    - [応用](#応用)
+    - [例題](#例題-1)
+      - [ARC 105F Lights Out on Connected Graph](#arc-105f-lights-out-on-connected-graphhttpsatcoderjpcontestsarc105tasksarc105_f)
+      - [Xmas2020 H](#xmas2020-hhttpsatcoderjpcontestsxmascon20tasksxmascon20_h)
+- [高次元FFT・FPS](#高次元fftfps)
+  - [高次元FFT・畳み込み](#高次元fft畳み込み)
+    - [概要](#概要-1)
+  - [Multivariate Multiplication(多変数FPSの乗算)](#multivariate-multiplication多変数fpsの乗算)
+    - [概要](#概要-2)
+  - [問題例](#問題例)
+    - [CF 1103E](#cf-1103ehttpscodeforcescomcontest1103probleme)
+    - [UOJ 596 三维立体混元劲](#uoj-596-三维立体混元劲httpsuojacproblem596)
+      - [多変数FPSの逆元](#多変数fpsの逆元)
+      - [多変数冪級数の微積分](#多変数冪級数の微積分)
+
+<!-- /code_chunk_output -->
+
 ## 特殊なFFT
 
 2べきFFT/畳み込み以外の特殊な状況で使用出来るFFTをまとめた。
@@ -234,11 +273,51 @@ $$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{|T| + |U|}$$
 
 #### 例題
 
+##### [ARC 105F Lights Out on Connected Graph](https://atcoder.jp/contests/arc105/tasks/arc105_f)
+
+> $N$頂点$M$辺のグラフ$G$が与えられる。頂点$1$から$N$を含む$G$の部分グラフのうち二部グラフであるようなものの個数は？
+>
+> $N \leq 17$
+
+この記事を書くために解き直したのだがかなり時間がかかってしまった、厳しい…
+
+[Elegia氏(EntropyIncreaser氏)](https://codeforces.com/blog/entry/83535?#comment-709269)のコメントにより日本にSubset Convolutionが広まるきっかけとなった問題である。
+
+まず、$e(S)$を$u,v \in S$である辺の本数と置く。これは$\mathrm{O}(M + N 2^N)$で求まる。
+
+次に、集合関数$f(S)$を「頂点集合$S$に対して、$v \in S$頂点を赤と青に塗り分けて色の異なる頂点同士にのみ辺を貼る組み合わせ」のように置く。すると$F(S)$は、赤く塗る頂点集合を固定することで次の式により求まる。
+
+$$f(S) = \sum_{T \subseteq S} 2^{e(S) - e(T) - e(S \setminus T)}$$
+
+上式は整理すると$T$の式と$T\setminus S$の式の畳み込みの形をしているので$\mathrm{O}(N^2 2^N)$で計算できる。
+
+次に$g(S)$を「(f(S)の条件) + 連結性を満たすグラフの個数」と置く。すると、$f,g$の母関数$F(S),G(S)$は
+
+$$F(S) = 1 + G(S) + \frac{G^2(S)}{2} + \ldots = e^{G(S)}$$
+
+を満たすので、
+
+$$G(S) = \log F(S)$$
+
+を満たす母関数$G(S)$が答えになるとわかる。
+
 ##### [Xmas2020 H](https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h)
 
-##### [ARC 105F](https://atcoder.jp/contests/arc105/tasks/arc105_f)
+(問題概要は省略)
 
-TODO:解く
+葉にふさわしい集合に対応する集合母関数を$L(S)$とすると、求める数え上げの答えの母関数$F(S)$は
+
+$$F(S) = L(S) + \frac{F^2(S)}{2}$$
+
+と表される。これを変形して
+
+$$ (F(S) - 1) ^ 2 = 1 - 2L(S)$$
+
+になる。ここで$g^2(S)=1-2L(S)$を満たす関数のうち$g(\emptyset)=1$である方を$\sqrt{1-2L(S)}$とおくと、$F(S) = 1 \pm \sqrt{1-2L(S)}$が成り立つことが帰納的に証明できる。よって、$F(\emptyset) = 0$とあわせて
+
+$$F(S) = 1 - \sqrt{1 - 2 L(S)}$$
+
+を計算すればよいとわかる。
 
 ## 高次元FFT・FPS
 
