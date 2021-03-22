@@ -9,3 +9,5 @@ https://blog.trisolaris.top/cf1067e/
 https://blog.trisolaris.top/cf981h/
 https://blog.trisolaris.top/%E3%80%8Cwc2019%E3%80%8Dtree/
 https://blog.trisolaris.top/bzoj2159/
+
+// https://codeforces.com/blog/entry/77551

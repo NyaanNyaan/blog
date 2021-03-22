@@ -11,6 +11,7 @@ ARC,AGC級のupsolveまとめ。
 <!-- code_chunk_output -->
 
 - [ARC](#arc)
+    - [ARC104-E](#arc104-ehttpsatcoderjpcontestsarc104tasksarc104_e)
     - [ARC104-F](#arc104-fhttpsatcoderjpcontestsarc104tasksarc104_f)
     - [ARC105-F](#arc105-fhttpsatcoderjpcontestsarc105tasksarc105_f)
     - [ARC106-E](#arc106-ehttpsatcoderjpcontestsarc106tasksarc106_e)
@@ -20,6 +21,14 @@ ARC,AGC級のupsolveまとめ。
 <!-- /code_chunk_output -->
 
 ## ARC
+
+#### [ARC104-E](https://atcoder.jp/contests/arc104/tasks/arc104_e)
+
+実装があまりにも重すぎて捨てた問題。
+
+こういう問題は大小関係を固定すればいつものDPに落ちますね。なんか最近2回くらい同じやつ解いた気がする。
+
+実装がかなり厳しくupsolveで50分かかった、修行不足…
 
 #### [ARC104-F](https://atcoder.jp/contests/arc104/tasks/arc104_f)
 

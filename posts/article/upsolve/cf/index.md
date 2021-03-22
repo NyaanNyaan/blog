@@ -12,6 +12,7 @@ tags: ["upsolve"]
 - [Div.1](#div1)
     - [#679-C](#679-chttpscodeforcescomcontest1444problemc)
     - [#681-D](#681-dhttpscodeforcescomcontest1442problemd)
+    - [#698-F](#698-fhttpscodeforcescomcontest1477problemf)
 
 <!-- /code_chunk_output -->
 
@@ -32,6 +33,4 @@ tags: ["upsolve"]
 
 #### [#698-F](https://codeforces.com/contest/1477/problem/F)
 
-面白そうだったのでずっと粘着していたが何もわからず… 連続確率分布に粘着するのは今後は控えようと思った。
-
-TODO: 解説を読む
+面白そうだったのでずっと粘着していたが何もわからず… 連続確率分布に粘着するのは今後は控えようと思った。[ここに解法を書いた。](https://nyaannyaan.github.io/blog/article/math/combinatorics/#cf-1477fhttpscodeforcescomcontest1477problemf)
