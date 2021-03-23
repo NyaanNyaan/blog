@@ -1,5 +1,5 @@
 ---
-title: "Gp_of_tokyo"
+title: "XXI Open Cup GP of Tokyo"
 date: 2021-03-18T22:17:00+09:00
 draft: false
 ---
