@@ -1,7 +1,7 @@
 ---
 title: "Test"
 date: 2020-10-13T18:46:29+09:00
-draft: false
+draft: true
 ---
 (自動生成 テスト)
 <figure class="zumen">
