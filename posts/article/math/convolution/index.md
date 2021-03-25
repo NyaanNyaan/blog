@@ -263,7 +263,7 @@ $$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{|T| + |U|}$$
 
 のようにランクの情報が付加されたものになるので、$x^{|S|}$次の項が求める答えとなる。計算量は$\mathrm{O}(n^2 2^n)$である。
 
-[verify用問題](https://judge.yosupo.jp/problem/subset_convolution)　提出を読むと$x$の指数部の取り方を変えて実装している人が多い。これは、上記のアルゴリズムをそのまま実装すると定数倍が非常に悪くなってしまうからである。
+[verify用問題](https://judge.yosupo.jp/problem/subset_convolution) $N=2^{20}$だとSIMDを使わない実装で1.0s程度が相場のようだ。
 
 #### 応用
 
