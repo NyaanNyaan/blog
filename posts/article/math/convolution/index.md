@@ -319,6 +319,23 @@ $$F(S) = 1 - \sqrt{1 - 2 L(S)}$$
 
 を計算すればよいとわかる。
 
+### Dirchlet Convolution
+
+#### 概要
+
+TODO:書く
+
+#### 例題
+
+#### [2019 ICPC Asia-East Continent Final C. Dirichlet k-th root](https://codeforces.com/gym/102471/problem/C)
+
+> $1$以上$n$以下の整数に対して定義される数論的関数$g$と整数$k$が与えられる。乗法をディリクレ積で定めた時、$g = f^k$を満たす関数を求めよ。
+> $n \leq 10^5,1 \leq k \leq 998244352$
+
+TODO:書く
+
+$f$の長さを倍々にしていくアルゴリズムで$\mathrm{O}(n \log n \log k)$、約数を全探索するアルゴリズムで$\mathrm{O}(n \log ^ 2 n)$が達成できると思う。さらに、[このブログの記事の4問目](https://codeforces.com/blog/Retired_MiFaFaOvO)に$\mathrm{O}(n \log n)$のアルゴリズムが載っている。
+
 ## 高次元FFT・FPS
 
 ### 高次元FFT・畳み込み

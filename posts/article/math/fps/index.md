@@ -28,6 +28,7 @@ draft: false
     - [CF 438E](#cf-438ehttpscodeforcescomcontest438probleme)
     - [LOJ575 不等関係](#loj575-不等関係httpslojacp575)
     - [$\deg(f)$が小さいときの$f(x)^k \mod x^n$](#degfが小さいときのfxk-mod-xn)
+      - [実装例(自分用)](#実装例自分用)
     - [CF 773F](#cf-773fhttpscodeforcescomproblemsetproblem773f)
 
 <!-- /code_chunk_output -->
@@ -242,19 +243,19 @@ $$F_i(x) = \frac{P_i(x)}{Q_i(x)}$$
 $$
   \left(
     \begin{array}{cc}
-      0 & 1 \newline \\
+      0 & 1 \newline
      -x & 1 
     \end{array}
   \right)
   \left(
     \begin{array}{cc}
-      P_{i-1}  \newline \\
+      P_{i-1}  \newline
       Q_{i-1}  
     \end{array}
   \right)
   = \left(
     \begin{array}{cc}
-      P_i  \newline \\
+      P_i  \newline
       Q_i
     \end{array}
   \right)
@@ -263,19 +264,19 @@ $$
 $$
 \left(
     \begin{array}{cc}
-      P_i   \newline \\
+      P_i   \newline
       Q_i
     \end{array}
   \right)=
   \left(
     \begin{array}{cc}
-      0 & 1  \newline \\ 
+      0 & 1  \newline
      -x & 1 
     \end{array}
   \right)^{i}
   \left(
     \begin{array}{cc}
-      1   \newline \\
+      1   \newline
       1
     \end{array}
   \right)
@@ -296,25 +297,25 @@ $$\lambda = \frac{1+\sqrt{1-4x}}{2}$$
 $$
   \left(
     \begin{array}{cc}
-      0 & 1  \newline \\
+      0 & 1  \newline
      -x & 1 
     \end{array}
   \right)^{n}=
   \left(
     \begin{array}{cc}
-      1 & 1  \newline \\
+      1 & 1  \newline
      \lambda & 1-\lambda 
     \end{array}
   \right)^{-1}
   \left(
     \begin{array}{cc}
-      \lambda & 0 \newline \\
+      \lambda & 0 \newline
      0 & 1 - \lambda 
     \end{array}
   \right)^{n}
   \left(
     \begin{array}{cc}
-      1 & 1  \newline \\
+      1 & 1  \newline
      \lambda & 1-\lambda 
     \end{array}
   \right)
@@ -323,13 +324,13 @@ $$
 $$
 \left(
     \begin{array}{cc}
-      P_n  \newline \\
+      P_n  \newline
       Q_n
     \end{array}
   \right)= \frac{1}{1-2\lambda}
    \left(
     \begin{array}{c}
-      2(1-\lambda) \lambda^n -(1-\lambda)^n \newline \\
+      2(1-\lambda) \lambda^n -(1-\lambda)^n \newline
      (1-\lambda)^n - 2\lambda^{n+1}
     \end{array}
   \right)
@@ -413,19 +414,19 @@ $$f_{n+2}=f_{n+1}(x+1)+f_nx$$
 $$
 \left(
   \begin{array}{c}
-  f_{n+2} \newline \\
+  f_{n+2} \newline
   f_{n+1}
   \end{array}
 \right) =
 \left(
   \begin{array}{cc}
-  x+1 & x \newline \\
+  x+1 & x \newline
   1 & 0
   \end{array}
 \right)
 \left(
   \begin{array}{c}
-  f_{n+1} \newline \\
+  f_{n+1} \newline
   f_{n}
   \end{array}
 \right)

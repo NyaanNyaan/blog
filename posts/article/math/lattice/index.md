@@ -26,6 +26,7 @@ draft: false
     - [自作問題 k-括弧列](#自作問題-k-括弧列)
     - [yukicoder No.1388 Less than K](#yukicoder-no1388-less-than-khttpsyukicodermeproblemsno1388)
     - [yukicoder No.1241 Eternal Tours](#yukicoder-no1241-eternal-tourshttpsyukicodermeproblemsno1241)
+    - [AGC***-*](#agc-httpsatcoderjpcontestsagc021tasksagc021_e)
 - [Young tableau](#young-tableau)
   - [ヤング図形(Young diagram)](#ヤング図形young-diagram)
   - [共役ヤング図形](#共役ヤング図形)
@@ -37,6 +38,11 @@ draft: false
 - [ad-hocなテクニック](#ad-hocなテクニック)
   - [AGC001 E BBQ hard](#agc001-e-bbq-hard)
   - [Japanese Knowledge](#japanese-knowledge)
+  - [二項係数のprefix sumの多点評価](#二項係数のprefix-sumの多点評価)
+    - [$\mathrm{O}(N^{1.5})$解](#mathrmon15解)
+    - [$\mathrm{O}(N^{\frac{6}{5}} \log N)$解](#mathrmonfrac65-log-n解)
+    - [$\mathrm{O}(N \log^ 3 N)$解](#mathrmon-log-3-n解)
+  - [2019 ICPC Asia-East Continent Final B. Black and White](#2019-icpc-asia-east-continent-final-b-black-and-whitehttpscodeforcescomgym102471problemb)
 - [FPS](#fps)
   - [Schröder number](#schröder-number)
   - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
@@ -259,7 +265,7 @@ TODO:書く
 
 ## ad-hocなテクニック
 
-ad-hocなAtCoderの問題などをまとめる。
+ad-hocな問題をまとめる。
 
 ### AGC001 E BBQ hard
 
@@ -282,6 +288,72 @@ $\binom{A_i+A_j+B_i+B_j}{A_i+A_j}$が$(-A_i,-B_i)$から$(A_j,B_j)$への経路�
 
 [こちらの記事](https://nyaannyaan.github.io/blog/article/upsolve/gp_of_tokyo/)に書いたので略。
 
+### 二項係数のprefix sumの多点評価
+
+> $(n,m)\ (m \leq n \leq N)$の組が$N$個与えられる。各$(n,m)$に対して
+> $$ F(n,m) = \sum_{k=0}^m \binom{n}{k}$$
+>
+> を計算せよ。 $N \leq 2 \times 10^5$程度
+> 
+
+[EntropyIncreaser氏のブログ](https://www.luogu.com.cn/blog/EntropyIncreaser/post-ying-ye-ri-zhi-2021126-duo-xun-wen-zu-ge-shuo-qian-zhui-hu)が出典。
+
+#### $\mathrm{O}(N^{1.5})$解
+
+二項係数をグリッド上の各点に言い換えると$n,m$を$1$増減させたときの値の変化を$\mathrm{O}(1)$で記述できるので、Mo's Algorithmで計算できる。
+
+#### $\mathrm{O}(N^{\frac{6}{5}} \log N)$解
+
+$$v_{n,m} = \left( F(n,m), \binom{n}{m} \right) ^T$$
+
+とおくと
+
+$$v_{n,m+1}=
+\left(
+  \begin{array}{cc}
+  1 & \frac{n-m}{m+1} \newline
+  0 & \frac{n-m}{m+1}
+  \end{array}
+\right) v_{n,m}
+$$
+
+$$v_{n+1,m}=
+\left(
+  \begin{array}{cc}
+  2 & -1 \newline
+  0 & \frac{n-1}{n-m+1}
+  \end{array}
+\right) v_{n,m}
+$$
+
+という式が成り立つので、多項式行列のprefix productを計算する問題に帰着する。そこで適当なブロックの大きさ$B$を取ってmin-25's algorithmにより$v(iB,jB)$を計算する。そして、各クエリに対しても最も近い点からmin-25's algorithmで残りの部分を補間する。計算量は
+
+- 多点評価で$\mathrm{O}(\frac{N}{B} \times \frac{N}{B}\log {\frac{N}{B}})$
+- クエリごとの計算で$\mathrm{O}(N \times \sqrt{B} \log B)$
+
+になるので、$B = N^{\frac{2}{5}}$と置いたとき$\mathrm{O}(N^{\frac{6}{5}} \log N)$になる。
+
+#### $\mathrm{O}(N \log^ 3 N)$解
+
+行列を$n$を変数とみなした多項式行列として考える。
+
+$$ (m+1)! v_{n,m+1}=
+\left(
+  \begin{array}{cc}
+  m+1 & n-m \newline
+  0 & n-m
+  \end{array}
+\right) m! v_{n,m}
+$$
+
+であるから、$v_{n,0}$から$v_{n,m}$までは$m$次の$n$の多項式行列の乗算で表されることがわかる。そこで、セグメントツリーの要領で行列を乗算した木を作った後に、各ノードで必要な$n$について多点評価を行い必要な行列を得れば答えが求まる。計算量は各クエリについて多点評価を最大$\log N$回行う部分がボトルネックで$\mathrm{O}(N \log^3 N)$になる。
+
+頑張って実装したが$N=2^{18}$でMo'sの5倍遅かったので封印…(monicな$2^n$次の乗算と多点評価を内部で行っているので色々とテクニックを使えば爆速になりそうだが、実装する気力ゼロ…)うまくやればlogが一個落ちないかなあと思ったがEI氏が書いてないってことは無理なんだろうなあ…
+
+### [2019 ICPC Asia-East Continent Final B. Black and White](https://codeforces.com/gym/102471/problem/B)
+
+TODO: 解く
+
 ## FPS
 
 FPSパンチで解けるグリッド問題をまとめる。
@@ -290,7 +362,9 @@ FPSパンチで解けるグリッド問題をまとめる。
 
 > $(0,0)$から$(n,n)$まで$y \leq x$を満たしながら下,右,右下のいずれかを選んで進む経路の数は？
 
-[分割可能な順列](https://en.wikipedia.org/wiki/Separable_permutation)
+TODO:書く
+
+関連:[分割可能な順列](https://en.wikipedia.org/wiki/Separable_permutation)
 
 ### [CF 755G](https://codeforces.com/contest/755/problem/G)
 
