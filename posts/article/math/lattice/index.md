@@ -50,7 +50,8 @@ draft: false
 - [FPS](#fps)
   - [カタラン数](#カタラン数)
   - [(Large) Schröder numberとDelannoy Number](#large-schröder-numberとdelannoy-number)
-  - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
+  - [例題](#例題-3)
+    - [CF 755G](#cf-755ghttpscodeforcescomcontest755problemg)
 
 <!-- /code_chunk_output -->
 
@@ -447,7 +448,9 @@ $$C(x) = \frac{1 - \sqrt{1 - 4x}}{2x}$$
 
 [参考](https://archive.lib.msu.edu/crcmath/math/math/d/d096.htm)
 
-### [CF 755G](https://codeforces.com/contest/755/problem/G)
+### 例題
+
+#### [CF 755G](https://codeforces.com/contest/755/problem/G)
 
 > $1$から$n$までの数字が書かれた$n$個のボールから$m$個のグループを作る。各グループは1個のボール、または連続する2個の数字が書かれたボールから構成される。
 > $n,k$が与えられる。$1\leq m\leq k$に対して条件を満たす組み合わせは何通りか？
