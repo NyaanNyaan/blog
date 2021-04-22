@@ -1,14 +1,14 @@
 ---
 title: "FPS Part2"
 date: 2021-04-22T15:18:01+09:00
-draft: true
+draft: false
 ---
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [問題集](#問題集)
+- [問題集(1)](#問題集1)
     - [CF 865G](#cf-865ghttpscodeforcescomproblemsetproblem865g)
     - [UOJ0424 count](#uoj0424-counthttpsuojacproblem424localeen)
       - [解法1 通常型母関数](#解法1-通常型母関数)
