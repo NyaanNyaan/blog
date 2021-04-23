@@ -8,31 +8,82 @@ draft: false
 
 <!-- code_chunk_output -->
 
-- [問題集(2)](#問題集2)
-  - [スターリング数・下降冪 関連](#スターリング数下降冪-関連)
-    - [基本的な性質](#基本的な性質)
-    - [下降階乗冪](#下降階乗冪)
-    - [(典型) 第2種スターリング数の$n$列目](#典型-第2種スターリング数のn列目)
-    - [(典型) コイン投げの回数の$k$乗の期待値](#典型-コイン投げの回数のk乗の期待値)
-    - [CF 1278F](#cf-1278fhttpscodeforcescomcontest1278problemf)
-    - [(自作) Newton interpolation](#自作-newton-interpolation)
-    - [CF 1516E](#cf-1516ehttpscodeforcescomcontest1516probleme)
+- [スターリング数・下降冪 関連](#スターリング数下降冪-関連)
+  - [第1種スターリング数](#第1種スターリング数)
+    - [公式集](#公式集)
+    - [組合せ的解釈](#組合せ的解釈)
+  - [第2種スターリング数](#第2種スターリング数)
+    - [公式集](#公式集-1)
+    - [組合せ的解釈とベル数](#組合せ的解釈とベル数)
+  - [下降階乗冪](#下降階乗冪)
+  - [(典型) 第2種スターリング数の$n$列目](#典型-第2種スターリング数のn列目)
+  - [(典型) コイン投げの回数の$k$乗の期待値](#典型-コイン投げの回数のk乗の期待値)
+  - [CF 1278F](#cf-1278fhttpscodeforcescomcontest1278problemf)
+  - [(自作) Newton interpolation](#自作-newton-interpolation)
+  - [CF 1516E](#cf-1516ehttpscodeforcescomcontest1516probleme)
 
 <!-- /code_chunk_output -->
 
-## 問題集(2)
-
 ### スターリング数・下降冪 関連
 
-知っている問題をまとめておく。
+知っている性質・問題をまとめておく。
 
-#### 基本的な性質
+#### 第1種スターリング数
 
-TODO:書く
+##### 公式集
 
 $$x^{\overline{n}} = \sum_{k=0}^n {n \brack k} x^k$$
 
+$${n \brack k} = \sum_{i=0}$$
+
+$$\sum_{k=0}^n {n \brack k} = n!$$
+
+$$\sum_{k=0}^n {n \brack k} x^k = x^{\overline{n}}$$
+
+漸化式 
+
+$${n \brack k} = (n-1){n - 1 \brack k} + {n - 1 \brack k - 1}$$
+
+$${0 \brack 0} = 1, {n \brack 0} = {0 \brack n} = 0$$
+
+${n \brack m}$を二項係数や累乗の和で表した閉じた公式は存在しないようだ。
+
+##### 組合せ的解釈
+
+${n \brack k}$は$n$個の要素を$k$個の巡回列に分ける場合の数を意味する。
+
+証明は漸化式の形が同じであることから従う。$n-1$個の要素からなる巡回列の集合に要素$n$を追加して$k$個のグループを作ることを考えると、$n$が新たなグループを作るのが${n-1 \brack k-1}$通り、$n$を既存のグループに入れるのが$(n-1) {n-1 \brack k}$通りなので${n \brack k} = (n-1){n - 1 \brack k} + {n - 1 \brack k - 1}$という式を得る。
+
+
+#### 第2種スターリング数
+
+##### 公式集
+
+$${n \brace k} = \frac{1}{k!}\sum_{i=0^k}(-1)^i \binom{k}{i} (k-i)^n $$
+
 $$x^n=\sum_{k=0}^n {n \brace k}x^{\underline{k}}$$
+
+漸化式
+
+$${n \brace k} = {n - 1 \brace k - 1} + k {n-1 \brace k}$$
+
+$${0 \brace 0} = 1, {n \brace 0} = {0 \brace n} = 0$$
+
+##### 組合せ的解釈とベル数
+
+${n \brace k}$は「$n$個の要素を$k$個のグループに分割する場合の数」に対応している。
+
+証明は漸化式の形が同じであることから従う。$n-1$個の要素からなるグループの集合に要素$n$を追加して$k$個のグループを作ることを考えると、$n$が新たなグループを作るのが${n-1 \brace k-1}$通り、$n$を既存のグループに入れるのが$k {n-1 \brace k}$通りなので${n \brace k} = {n - 1 \brace k - 1} + k {n-1 \brace k}$という式を得る。
+
+また、$n$要素をいくつかのグループに分割する場合の数をBell numberと呼ぶ。これは第二種スターリング数を用いて
+
+$$B_n = \sum_{k=0}{n \brace k}$$
+
+で計算できる。また、$n$要素を区別可能なグループに分割する場合の数をordered Bell numberと呼ぶが、こちらも同様に
+
+$$a_n = \sum_{k=0}k!{n \brace k}$$
+
+で計算できる。
 
 #### 下降階乗冪
 
@@ -78,9 +129,9 @@ $$\sum_k  {n \brace k} x^k=e^{-x}\sum_{i=0}^\infty \frac{i^n}{i!}x^i$$
 
 $$E[x^k] = \sum_{i=0}^k {k \brace i} E[x^{\underline i}] $$
 
-であるから$E[x^{\underline{k}}]$が計算できれば良い。$k\gt 1$のとき
+であるから$E\lbrack x^{\underline{k}} \rbrack$が計算できれば良い。$k\gt 1$のとき
 
-$$ f_k := E[x^{\underline{k}}] = \sum_{x=0}^\infty (x+1)^{\underline{k}} (1-p)^x p $$
+$$ f_k := E\lbrack x^{\underline{k}}\rbrack = \sum_{x=0}^\infty (x+1)^{\underline{k}} (1-p)^x p $$
 
 $$= k! \sum_{x=0}^\infty \binom{x+1}{k}(1-p)^x p$$
 
@@ -102,9 +153,23 @@ $$= (1-p) ( f_k + k f_{k-1}) \iff f_k = \frac{k(1-p)}{p} f_{k-1}$$
 
 モーメント母関数を利用すると$[t^k](pe^t + 1 - p)^n$が答えだとわかるので$\mathrm{O}(k \log k)$で速やかに解けるが、ここでは$\mathrm{O}(k)$解法を考えたい。
 
-$$E\left[\binom{x}{k}\right] = \binom{n}{k} p^k$$
+表が$x$回出る確率を$f_x$として母関数$F(t)$を
 
-を帰納法により示せるので、(TODO:示す)スターリング数の公式より
+$$F(t) = \sum_{x=0}^n f_x t^x$$
+
+とおくと、
+
+$$F^{(k)}(1) = \sum_{x=k}^n f_x x^{\underline{k}} = E[x^{\underline{k}}]$$
+
+になることを利用する。この問題では$F(t)$は二項分布の母関数なので
+
+$$F(t) = (pt + 1 - p) ^ n$$
+
+となるから、
+
+$$E[x^{\underline{k}}] = n^{\underline{k}} p^k$$
+
+を得られる。よってスターリング数の公式より
 
 $$E\lbrack x^k \rbrack = \sum_{i=0}^k {k \brace i} n^{\underline{i}} p^i$$
 
@@ -115,6 +180,12 @@ $$\sum_{j=0}^k \frac{1}{j!} \sum_{i=0}^{j}(-1)^{j-i} \binom{j}{i} i^k j! \binom{
 $$ = \sum_{i=0}^k i^k \binom{n}{i} p^i \left( \sum_{j=0}^{k-i} (-1)^j \binom{n-i}{j} p^j \right)$$
 
 と変形出来て、かっこ内部は格子上の問題に言い換えると全体を$\mathrm{O}(k)$で計算できる。($n$と$k$の大小で場合分けが必要で少し面倒だが。)よってこの問題を$\mathrm{O}(k)$で解くことが出来た。
+
+なお、$n \gg p$の時はポアソン分布と呼ばれる分布になり、
+
+$$E\lbrack x^k \rbrack = \sum_{i=0}^k {k \brace i} (np)^i $$
+
+を得る。(ポアソン分布の$n$次のモーメント)
 
 #### (自作) Newton interpolation
 
@@ -159,6 +230,8 @@ $$ = \sum_{i=0}^k p_k x^k e^x = e^x \mathrm{OGF}(p_n)$$
 $$p_i = [x^i] \left(\mathrm{EGF}(f(n)) e^{-x} \right)$$
 
 から$p$を高速に列挙できる。
+
+> 追記：後で気づいたが、ここまで回りくどいことをしなくても右辺を展開すれば容易に2重シグマからFFTに持ち込める。
 
 この問題は$f(0),f(1),\ldots,f(k)$から元の関数を復元するアルゴリズムについて考察したときに得られたものである。ここから$f(0),f(1),\ldots,f(k)$に対する$\mathrm{o}(k \log^2 k)$の多項式補間が出来ないか考えたり調べたりしたが、ニュートン基底と単項式基底の変換は$\mathrm{O}(k \log^2 k)$が限界のようだ…残念。(スターリング行列の乗算周りを色々漁ったが無理そうだった。) [引っ掛かった論文](https://core.ac.uk/download/pdf/82336238.pdf)
 
