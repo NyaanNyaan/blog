@@ -15,7 +15,6 @@ draft: false
   - [第2種スターリング数](#第2種スターリング数)
     - [公式集](#公式集-1)
     - [組合せ的解釈とベル数](#組合せ的解釈とベル数)
-  - [下降階乗冪](#下降階乗冪)
   - [(典型) 第2種スターリング数の$n$列目](#典型-第2種スターリング数のn列目)
   - [(典型) コイン投げの回数の$k$乗の期待値](#典型-コイン投げの回数のk乗の期待値)
   - [CF 1278F](#cf-1278fhttpscodeforcescomcontest1278problemf)
@@ -33,8 +32,6 @@ draft: false
 ##### 公式集
 
 $$x^{\overline{n}} = \sum_{k=0}^n {n \brack k} x^k$$
-
-$${n \brack k} = \sum_{i=0}$$
 
 $$\sum_{k=0}^n {n \brack k} = n!$$
 
@@ -85,33 +82,19 @@ $$a_n = \sum_{k=0}k!{n \brace k}$$
 
 で計算できる。
 
-#### 下降階乗冪
-
-関係式$f(n)=\sum_i a_in^{\underline{i}}$が与えられたときに$f$と$a$の関係式を考える。
-
-$$\mathrm{EGF}(x^{\underline{n}})=\sum_{i=n}^\infty \frac{i^{\underline{n}}}{i!}x^i=x^ne^x$$
-
-を利用すると、
-
-$$\mathrm{EGF}(f)=\sum_i\frac{f(i)}{i!}x^i=\sum_i\frac{x^i}{i!}\sum_{j=0}^\infty a_ji^{\underline{j}}$$
-
-$$=\sum_{j=0}^\infty a_j\sum_i\frac{i^{\underline{j}}}{i!}x^i=\sum_{j=0}^\infty a_jx^je^x=e^x\sum_ia_ix^i$$
-
-と変形できる。よって、
-
-$$e^x\mathrm{OGF}(a)=\mathrm{EGF}(f)$$
-
-が従う。
-
 #### (典型) 第2種スターリング数の$n$列目
 
 > ${n \brace 0},{n \brace 1},\ldots,{n \brace n}$を$\mathrm{O}(n \log n)$で求めよ。
 
 公式
 
-$$x^n=\sum_{k=0}^n {n \brace k}x^{\underline{k}}$$
+$$m^n=\sum_{k=0}^n {n \brace k}m^{\underline{k}}$$
 
-に上の関係式を利用すると、
+を
+
+$$\mathrm{EGF}(m^{\underline{k}})=\sum_{i=n}^\infty \frac{i^{\underline{k}}}{i!}m^i=x^ke^x$$
+
+利用して変形すると、
 
 $$\sum_{i=0}^\infty \frac{i^n}{i!}x^i=e^x\sum_k {n \brace k}x^k$$
 
