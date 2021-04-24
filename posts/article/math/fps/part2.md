@@ -1,5 +1,5 @@
 ---
-title: "FPS Part2"
+title: "FPS Part 2"
 date: 2021-04-22T15:18:01+09:00
 draft: false
 ---

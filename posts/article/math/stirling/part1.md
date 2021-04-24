@@ -1,5 +1,5 @@
 ---
-title: "Part3"
+title: "Stirling part 1"
 date: 2021-04-22T17:59:34+09:00
 draft: false
 ---
@@ -82,7 +82,9 @@ $$a_n = \sum_{k=0}k!{n \brace k}$$
 
 で計算できる。
 
-#### (典型) 第2種スターリング数の$n$列目
+#### 例題
+
+##### (典型) 第2種スターリング数の$n$列目
 
 > ${n \brace 0},{n \brace 1},\ldots,{n \brace n}$を$\mathrm{O}(n \log n)$で求めよ。
 
@@ -104,7 +106,7 @@ $$\sum_k  {n \brace k} x^k=e^{-x}\sum_{i=0}^\infty \frac{i^n}{i!}x^i$$
 
 から計算できる。
 
-#### (典型) コイン投げの回数の$k$乗の期待値
+##### (典型) コイン投げの回数の$k$乗の期待値
 
 > $p$の確率で表が出るコインが与えられる。$X$が表になるまで投げる回数を$T$とするとき、$E[T^k]$を求めよ。
 
@@ -126,7 +128,7 @@ $$= (1-p) ( f_k + k f_{k-1}) \iff f_k = \frac{k(1-p)}{p} f_{k-1}$$
 
 (モーメント母関数テクニックを使った方が見通しがよさそう…)
 
-#### [CF 1278F](https://codeforces.com/contest/1278/problem/F)
+##### [CF 1278F](https://codeforces.com/contest/1278/problem/F)
 
 > $p$の確率で表が出るコインを$N$回投げる。表が出た回数を$T$とするとき、$E[T^k]$を求めよ。
 >
@@ -170,7 +172,7 @@ $$E\lbrack x^k \rbrack = \sum_{i=0}^k {k \brace i} (np)^i $$
 
 を得る。(ポアソン分布の$n$次のモーメント)
 
-#### (自作) Newton interpolation
+##### (自作) Newton interpolation
 
 > $k$次多項式$f(n)$を$n=0,1,\ldots,k$で評価した値$f(0),f(1),\ldots,f(k)$が与えられる。
 > 
@@ -218,7 +220,7 @@ $$p_i = [x^i] \left(\mathrm{EGF}(f(n)) e^{-x} \right)$$
 
 この問題は$f(0),f(1),\ldots,f(k)$から元の関数を復元するアルゴリズムについて考察したときに得られたものである。ここから$f(0),f(1),\ldots,f(k)$に対する$\mathrm{o}(k \log^2 k)$の多項式補間が出来ないか考えたり調べたりしたが、ニュートン基底と単項式基底の変換は$\mathrm{O}(k \log^2 k)$が限界のようだ…残念。(スターリング行列の乗算周りを色々漁ったが無理そうだった。) [引っ掛かった論文](https://core.ac.uk/download/pdf/82336238.pdf)
 
-#### [CF 1516E](https://codeforces.com/contest/1516/problem/E)
+##### [CF 1516E](https://codeforces.com/contest/1516/problem/E)
 
 > $1$から$N$からなる長さ$N$の順列が与えられる。$1 \leq j \leq K$について、$j$回のswapで得られる順列の場合の数は？
 > 
