@@ -1,6 +1,6 @@
 ---
 title: "FFT 高速化記"
-date: 2020-05-02T21:31:00+09:00
+date: 2021-05-02T21:31:00+09:00
 draft: false
 ---
 
@@ -115,3 +115,4 @@ Cooley-Tukeyを4基底に変える　[297ms](https://old.yosupo.jp/submission/46
 三角関数を無くす 手元だと30ms程度伸びたがLC上では変化なし… [302ms](https://old.yosupo.jp/submission/46599)
 
 過去の提出を読んでいたら[Karatsubaを通している提出](https://judge.yosupo.jp/submission/2845)に気づく。参考にしてゴッソリ書き換えて大幅に高速化。 [182ms](https://old.yosupo.jp/submission/46604)
+  - 正当性が怪しいが、通っているので問題ない(は？) ($N=2^{20}$だと落ちる気がする…)
