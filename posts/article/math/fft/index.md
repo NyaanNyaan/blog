@@ -13,7 +13,7 @@ draft: false
 - 実数FFTを高速化する
   - NTTをこれ以上高速化するのはしんどすぎてやりたくない
   - 実数FFTはまともに書いたことがないので伸びしろありまくり
-  - avx512使ってみたいね
+  - SIMD初心者なので色々アーキ周りの知識をつけたい
 
 ### 読む
 
@@ -25,7 +25,7 @@ draft: false
 
 FFTを3回から1.5回に減らす謎の高速化アルゴリズムと、Python勢がLCで使っているToom-3を勉強する
 
-#### 高速化1(名称不明)
+#### 高速化1(Halfcomplex-format DFT)
 
 > $W$は$1$の$M$乗根とする。また、数列$(f_i),(g_i)$は実数からなる長さ$M$の列とする。
 >
@@ -53,7 +53,7 @@ $$A_k - \overline{A_{-k}} = 2 i G_k$$
 
 を得るので辺々掛けて求めるものを得る。
 
-#### 高速化2(名称不明)
+#### 高速化2(Halfcomplex-format DFT)
 
 > $M = 2m, W$は$1$の$M$乗根とする。また、数列$(a_i)$は実数からなる列とする。
 > 
@@ -116,3 +116,19 @@ Cooley-Tukeyを4基底に変える　[297ms](https://old.yosupo.jp/submission/46
 
 過去の提出を読んでいたら[Karatsubaを通している提出](https://judge.yosupo.jp/submission/2845)に気づく。参考にしてゴッソリ書き換えて大幅に高速化。 [182ms](https://old.yosupo.jp/submission/46604)
   - 正当性が怪しいが、通っているので問題ない(は？) ($N=2^{20}$だと落ちる気がする…)
+
+高速化のために構造体を取っ払ってベタ書き(しんどい) [180ms](https://old.yosupo.jp/submission/46633)
+
+待望のSIMD化です→全く早くなってないが？HELP [179ms](https://old.yosupo.jp/submission/46645)
+
+プロファイラを起動 とりあえず激重`llround`くんを消す [171ms](https://old.yosupo.jp/submission/46674)
+
+行きだけSIMD化したバージョンとそうでないバージョンを作って比較する
+
+- 非SIMD
+  - genw 6.45% 行き 52.62% 帰り 33.47% 
+- SIMD
+  - genw 6.17% 行き 46.81% 帰り 34.16%
+
+SIMD版がほんのわずかに高速化されてそう(わずか過ぎない？)
+
