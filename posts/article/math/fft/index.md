@@ -130,5 +130,30 @@ Cooley-Tukeyを4基底に変える　[297ms](https://old.yosupo.jp/submission/46
 - SIMD
   - genw 6.17% 行き 46.81% 帰り 34.16%
 
-SIMD版がほんのわずかに高速化されてそう(わずか過ぎない？)
+SIMD版がほんのわずかに高速化されてそう、それでもわずか過ぎない？
 
+気分転換に非本質部分(入出力周り)を高速化　[165ms](https://judge.yosupo.jp/submission/46700)
+
+アセンブリを覗いてみる
+  - SIMDベタ打ちしなくても自動でSIMD化されとるやんけ！？知らなかった…
+
+これはNTT3回に勝てないんじゃないか？
+
+- 真面目に考える
+  - FFT 回数
+    - 実数 6回 mod 9回
+  - 乗算の速度と回数
+    - 実数 2クロック程度 mod 2.5クロック程度
+    - 実数がmodの0.667倍の回数
+  - 空間計算量
+    - 実数がmodの10倍(ヤバ)
+  - ロード/ストア命令の回数
+    - 実数がmodの2.667倍の回数
+  - 速度(LC,入出力を除く)
+    - 実数 140ms程度 mod 90ms程度
+
+-> 明らかにロード/ストアが重すぎるせい
+
+キャッシュ回りのテクを調べる　[最適化マニュアル](https://www.intel.ru/content/dam/www/public/ijkk/jp/ja/documents/developer/iaopt_j.pdf)
+
+prefetchを効かせる　早くなったのか…？　[160ms](https://judge.yosupo.jp/submission/46709)
