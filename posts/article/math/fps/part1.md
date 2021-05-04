@@ -18,9 +18,12 @@ draft: false
       - [例1 カタラン数](#例1-カタラン数)
       - [例2 N頂点の根付き木の数え上げ(ケイリーの公式)](#例2-n頂点の根付き木の数え上げケイリーの公式)
   - [モーメント母関数](#モーメント母関数)
+    - [概要](#概要-1)
     - [例題](#例題-1)
+      - [CF 1278F](#cf-1278fhttpscodeforcescomcontest1278problemf)
       - [(自作) $k$乗和](#自作-k乗和)
       - [yukicoder No.1124 Earthquake Safety](#yukicoder-no1124-earthquake-safetyhttpsyukicodermeproblemsno1124)
+      - [codechef April Lunchtime 2021 : XX](#codechef-april-lunchtime-2021-xxhttpswwwcodechefcomltime95aproblemsxx)
 
 <!-- /code_chunk_output -->
 
@@ -172,9 +175,27 @@ $$R_n=\left|\frac{d^{n-1}}{d \omega ^{n-1}} e^{n\omega}\right|_{\omega=0}=n^{n-1
 
 ### モーメント母関数
 
-TODO:概要を書く
+#### 概要
+
+確率変数$X$に対して$M_X(t) = E\lbrack e^{tX}\rbrack$をモーメント母関数と呼ぶ。名前の由来は
+
+$$M_X(t) = E\lbrack e^{tx} \rbrack = E\left\lbrack \sum_{i=0}^\infty \frac{(tX)^i}{i!} \right\rbrack$$
+
+$$= 1 + E\lbrack X \rbrack t + \frac{E \lbrack x^2 \rbrack}{2!}t^2 + \frac{E \lbrack x^3 \rbrack}{3!}t^3 + \cdots$$
+
+と変形するとわかる通り、$M_X(t)$は$X$のモーメントの母関数になっているからである。
+
+競技プログラミングでは$k$乗和の期待値や総和を計算するのに用いることが出来る。
 
 #### 例題
+
+##### [CF 1278F](https://codeforces.com/contest/1278/problem/F)
+
+> $p$の確率で表が出るコインを$N$回投げる。表が出た回数を$T$とするとき、$E[T^k]$を求めよ。
+>
+> $n \lt 998244353, k \lt 5000$
+
+モーメント母関数を使うと$\mathrm{O}(n \log n)$で即座に計算できる。回数の母関数は$f(x) = (px + 1 - p) ^ n$であるから、ここに$x = e^t$を代入して$M(t) = (pe^t + 1 - p)^n$を得て、$[\frac{t^k}{k!}] M(t)$が答えである。
 
 ##### (自作) $k$乗和
 
@@ -188,7 +209,7 @@ $$A(e^t)=\sum_i a_i e^{ti}=\sum_i a_i \left(\sum_k \frac{i^k t^k}{k!}\right)$$
 
 $$=\sum_k \frac{t^k}{k!} \left(\sum_i a_i i^k \right) = \sum_k S(k) \frac{t^k}{k!} $$
 
-となるので$A(e^t)$は$S(k)$のEGFであるとわかる。よって$A(e^t)$を$\mathrm{O}(n \log^2 n)$で計算すればよい。
+となるので$A(e^t)$は$S(k)$のEGFであるとわかる。よって$A(e^t)$を$\mathrm{O}(n \log^2 n)$で計算すればよい。(TODO : どうやって？)
 
 この関係式は$\sum_k$($k$である場合の数)×($k$の多項式で表されるスコア)の和を求める問題に適用できる。
 
@@ -208,6 +229,7 @@ $$=\sum_k \frac{t^k}{k!} \left(\sum_i a_i i^k \right) = \sum_k S(k) \frac{t^k}{k
 とすることで木DPで計算できる形に持ち込める。また、$dp_{n}$をFPSと見なすと子の寄与のマージを多項式の積で表せるので、下の疑似コードのような簡潔な遷移で表せる。
 
 ```python
+# python風の疑似コード
 ans = 0
 
 def dfs(c):
@@ -218,32 +240,48 @@ def dfs(c):
   for i in range(len(dp)):
     score += dp[i] * i * i * i
   # 根以外の辺の場合の数
-  rest = pow(2, max(0, N - 1 - c(s)), mod)
+  rest = pow(2, max(0, N - 1 - s(c)), mod)
   # 答えへの寄与
   ans += score * rest
   # cの親の辺がない場合を足しておく
-  dp[0] = pow(2, c(s) - 1, mod)
+  dp[0] = pow(2, s(c) - 1, mod)
   return dp
 
 dfs(0)
 ```
 
-ただしこのDPは計算量が$\mathrm{\tilde{O}(N^2)}$になってしまう。ここで、欲しいものは$\sum_{dp_n} dp_{n,k} k^3$なのに注目してモーメント母関数を登場させる。すなわち、多項式$dp_n(x)$を計算する代わりに4次のFPS$dp_n(e^t)$を管理する。すると、子のマージが$\mathrm{O}(1)$で済むため計算量が$\mathrm{O}(N)$に落ちる。
+ただしこのDPは計算量が$\mathrm{\tilde{O}(N^2)}$になってしまう。ここで、欲しいものは$\sum_{dp_n} dp_{n,k} k^3$なのに注目してモーメント母関数を登場させる。すなわち、多項式$dp_n(x)$を計算する代わりに4次のFPSである$dp_n(e^t)$を管理する。すると、子のマージが$\mathrm{O}(1)$で済むため計算量が$\mathrm{O}(N)$に落ちる。
 
 ```python
-ans = 0
-
 def dfs(c):
   dp = fps([1, 1, 1/2, 1/6])
   for d in (child of c): dp *= dfs(d)
   score = dp[3] * 6
-  rest = pow(2, max(0, N - 1 - c(s)), mod)
+  rest = pow(2, max(0, N - 1 - s(c)), mod)
   ans += score * rest
-  dp[0] += pow(2, c(s) - 1, mod)
+  dp[0] += pow(2, s(c) - 1, mod)
   return dp
-
-dfs(0)
 ```
 
 [提出](https://yukicoder.me/submissions/516887)
 
+##### [codechef April Lunchtime 2021 : XX](https://www.codechef.com/LTIME95A/problems/XX)
+
+> $k=1,\ldots,k_{\max}$に対して次の期待値を計算せよ。
+> - 確率$g$で魔法の石が手に入るガチャを$n$回引く。ガチャを引き終わった後に$r$個の石を持っているときのスコアを$(ar+b)^k$とすると、スコアの期待値は？
+> 
+> $n \leq 10^9, k_{\max} \leq 5 \times 10^5$
+
+スコアが$r^k$の時は簡単で、母関数$f(x) = (gx + 1 - g) ^ n$に$x = e^t$を代入したもの$G(t)$がそのまま答えの母関数になる。
+
+スコアが$(ar+b)^k$の時はどのようになるとうまくいくのかを考える。常に石を$r$個もらえる時の母関数$G_r(t)$の$k$次の係数が$(ar+b)^k / k!$になってくれると嬉しいので、
+
+$$G_r(t) = \sum_{k=0}^\infty \frac{(ar+b)^k}{k!}t^k = e^{(ar+b)t}$$
+
+より$x^r$を$e^{(ar+b)t}$に変換すればよいとわかる。これは$G_r(t) = e^{bt} \cdot (e^{at})^r$と変形できるので、$G(t)$は
+
+$$G(t) = e^{bt} \sum_i f_i (e^{at})^r =  e^{bt} \cdot f(e^{at}) $$
+
+$$ = e^{bt} (ge^{at} + 1 - g)^n$$
+
+になり、この式は$\mathrm{O}(k_{\max} \log k_{\max})$で計算できる。
