@@ -34,6 +34,38 @@ draft: false
   };
   ```
 
+- SFINAE 毎回忘れるのでひな形をメモっておく
+  - メンバ変数
+    ```cpp
+    template <typename T>
+    struct has_value {
+    private:
+      template <typename U>
+      static auto confirm(U u) -> decltype(u.value, std::true_type());
+      static auto confirm(...) -> std::false_type;
+
+    public:
+      enum : bool { value = decltype(confirm(std::declval<T>()))::value };
+    };
+    // has_value<T>::valueでtrue/falseを得る
+    ```
+  - メンバ型
+    ```cpp
+    template <class T>
+    struct has_type {
+    private:
+      template <class U>
+      static auto confirm(U)
+          -> decltype(std::declval<typename U::type>(), std::true_type());
+      static auto confirm(...) -> std::false_type;
+
+    public:
+      enum : bool { value = decltype(confirm(std::declval<T>()))::value };
+    };
+    // has_type<T>::valueでtrue/falseを得る
+    ```
+  - 本当は`true_type, false_type`を得られる形にすべきなんだろうけど理由がよくわかっていないぜ！
+
 ## アルゴリズム
 
 - $n$個のものを$m$個にできるだけ均等に分けるのは
