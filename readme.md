@@ -1,1 +1,1 @@
-[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://nyaannyaan.github.io/blog/)
+移転しました -> [新ブログ](https://github.com/NyaanNyaan/NyaanNyaan.github.io)
